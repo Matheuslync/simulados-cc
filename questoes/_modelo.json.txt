@@ -1,0 +1,22 @@
+Este arquivo é só um modelo e é ignorado pelo build porque está fora de uma pasta de matéria.
+Copie o bloco abaixo para questoes/<materia>/<nome>.json e preencha.
+
+{
+  "pergunta": "Qual a complexidade de remover o topo de um heap com n elementos?",
+  "alternativas": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+  "resposta": "B",
+  "explicacao": "Troca a raiz pelo último elemento e desce (heapify-down) pela altura da árvore: O(log n).",
+  "fase": 6,
+  "autor": "seu-usuario-do-github"
+}
+
+Com código:
+
+{
+  "pergunta": "O que é impresso?",
+  "codigo": "x = [1, 2, 3]\nprint(x[-1])",
+  "alternativas": ["1", "3", "Erro", "[3]"],
+  "resposta": "B",
+  "explicacao": "Índice -1 é o último elemento.",
+  "autor": "seu-usuario-do-github"
+}

@@ -1,0 +1,14 @@
+{
+  "pergunta": "O que é impresso?",
+  "codigo": "arq = open(\"t.txt\", \"w+\")\narq.write(\"banana\")\narq.seek(0)\nprint(arq.read().count(\"a\"))\narq.close()",
+  "linguagem": "python",
+  "alternativas": [
+    "0",
+    "2",
+    "3",
+    "6"
+  ],
+  "resposta": "C",
+  "explicacao": "Depois do seek(0) o read devolve 'banana', que tem 3 letras 'a'.",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,12 @@
+{
+  "pergunta": "Uma arquitetura RISC se caracteriza por:",
+  "alternativas": [
+    "Muitas instruções complexas e de tamanho variável",
+    "Poucas instruções simples, executadas rapidamente",
+    "Ausência de registradores",
+    "Uso exclusivo em mainframes"
+  ],
+  "resposta": "B",
+  "explicacao": "RISC = Reduced Instruction Set Computer (ex.: ARM). CISC tem muitas instruções complexas (ex.: x86).",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,12 @@
+{
+  "pergunta": "Para um grafo esparso, a representação que economiza memória é:",
+  "alternativas": [
+    "Matriz de adjacência",
+    "Lista de adjacência",
+    "Vetor de pesos",
+    "Tabela verdade"
+  ],
+  "resposta": "B",
+  "explicacao": "Lista de adjacência usa O(V+E); matriz usa O(V²).",
+  "autor": "Matheuslync"
+}

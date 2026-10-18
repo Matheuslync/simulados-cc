@@ -1,0 +1,14 @@
+{
+  "pergunta": "O que é impresso?",
+  "codigo": "arq = open(\"t.txt\", \"w+\")\narq.write(\"Gravando no arquivo\")\narq.seek(9)\nprint(arq.read())\narq.close()",
+  "linguagem": "python",
+  "alternativas": [
+    "Gravando no arquivo",
+    "no arquivo",
+    "arquivo",
+    "o no arquivo"
+  ],
+  "resposta": "B",
+  "explicacao": "seek(9) pula 'Gravando ' (9 caracteres) e lê a partir de 'no'.",
+  "autor": "Matheuslync"
+}

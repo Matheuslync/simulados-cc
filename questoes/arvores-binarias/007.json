@@ -1,0 +1,12 @@
+{
+  "pergunta": "'Tabela binária'/busca binária exige que os dados estejam:",
+  "alternativas": [
+    "Em uma pilha",
+    "Ordenados",
+    "Em hash",
+    "Em ordem aleatória"
+  ],
+  "resposta": "B",
+  "explicacao": "Busca binária compara com o meio e descarta metade; só funciona com dados ordenados. Custo O(log n).",
+  "autor": "Matheuslync"
+}

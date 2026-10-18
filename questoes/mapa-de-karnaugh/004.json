@@ -1,0 +1,12 @@
+{
+  "pergunta": "F(A,B) = Σm(1,2,3). Expressão simplificada:",
+  "alternativas": [
+    "AB",
+    "A + B",
+    "A ⊕ B",
+    "A' + B'"
+  ],
+  "resposta": "B",
+  "explicacao": "Só é 0 em 00 → função OR: A + B.",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,12 @@
+{
+  "pergunta": "Quem é considerada a primeira programadora da história, por escrever um algoritmo para a Máquina Analítica de Babbage?",
+  "alternativas": [
+    "Grace Hopper",
+    "Ada Lovelace",
+    "Marie Curie",
+    "Hedy Lamarr"
+  ],
+  "resposta": "B",
+  "explicacao": "Ada Lovelace escreveu notas com um algoritmo para a Máquina Analítica (século XIX).",
+  "autor": "Matheuslync"
+}

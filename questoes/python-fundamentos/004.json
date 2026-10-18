@@ -1,0 +1,14 @@
+{
+  "pergunta": "O que é impresso?",
+  "codigo": "def f(n):\n    if n <= 1:\n        return 1\n    return n * f(n - 1)\nprint(f(4))",
+  "linguagem": "python",
+  "alternativas": [
+    "4",
+    "10",
+    "24",
+    "Erro: recursão infinita"
+  ],
+  "resposta": "C",
+  "explicacao": "Fatorial recursivo: 4·3·2·1 = 24. 'n <= 1' é a condição de parada.",
+  "autor": "Matheuslync"
+}

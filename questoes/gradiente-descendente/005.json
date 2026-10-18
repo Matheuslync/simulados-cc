@@ -1,0 +1,12 @@
+{
+  "pergunta": "Por que o gradiente descendente pode terminar em um mínimo local?",
+  "alternativas": [
+    "Porque usa só informação local do ponto atual",
+    "Porque calcula a função inteira",
+    "Porque só funciona em retas",
+    "Porque η é sempre 1"
+  ],
+  "resposta": "A",
+  "explicacao": "Ele segue a inclinação local; o resultado depende do ponto inicial.",
+  "autor": "Matheuslync"
+}

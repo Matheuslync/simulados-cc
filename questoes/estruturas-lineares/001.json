@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual estrutura segue o princípio LIFO?",
+  "alternativas": [
+    "Fila",
+    "Pilha",
+    "Lista circular",
+    "Hash"
+  ],
+  "resposta": "B",
+  "explicacao": "Pilha: Last In, First Out.",
+  "autor": "Matheuslync"
+}

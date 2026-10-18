@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual função grava um dicionário Python em um arquivo como JSON?",
+  "alternativas": [
+    "json.loads",
+    "json.dump",
+    "json.load",
+    "json.read"
+  ],
+  "resposta": "B",
+  "explicacao": "json.dump(obj, arquivo). dumps → string; load/loads → leitura.",
+  "autor": "Matheuslync"
+}

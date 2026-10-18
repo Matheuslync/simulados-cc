@@ -1,0 +1,12 @@
+{
+  "pergunta": "Se f'(x) = 0 e f''(x) > 0 nesse ponto, temos:",
+  "alternativas": [
+    "Máximo local",
+    "Mínimo local",
+    "Ponto de inflexão sempre",
+    "Descontinuidade"
+  ],
+  "resposta": "B",
+  "explicacao": "Concavidade para cima → mínimo.",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,12 @@
+{
+  "pergunta": "Inserindo 'casa', 'casal' e 'cão' em uma trie, o que acontece com o prefixo 'ca'?",
+  "alternativas": [
+    "É duplicado para cada palavra",
+    "É compartilhado pelos três caminhos",
+    "É descartado",
+    "Vira uma folha"
+  ],
+  "resposta": "B",
+  "explicacao": "Prefixos comuns são armazenados uma única vez; os caminhos se separam depois.",
+  "autor": "Matheuslync"
+}

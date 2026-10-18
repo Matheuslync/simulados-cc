@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual porta lógica dá saída 1 apenas quando as entradas são diferentes?",
+  "alternativas": [
+    "AND",
+    "OR",
+    "XOR",
+    "NAND"
+  ],
+  "resposta": "C",
+  "explicacao": "XOR (ou exclusivo).",
+  "autor": "Matheuslync"
+}

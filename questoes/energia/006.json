@@ -1,0 +1,12 @@
+{
+  "pergunta": "Fator de potência baixo (ex.: 0,7) indica:",
+  "alternativas": [
+    "Excesso de cargas indutivas e desperdício",
+    "Sistema ideal",
+    "Consumo zero",
+    "Rede desligada"
+  ],
+  "resposta": "A",
+  "explicacao": "FP = P/S; ideal 0,92–1. Corrige-se com capacitores.",
+  "autor": "Matheuslync"
+}

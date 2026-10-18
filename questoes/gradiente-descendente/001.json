@@ -1,0 +1,12 @@
+{
+  "pergunta": "No gradiente descendente, o passo é dado na direção:",
+  "alternativas": [
+    "Da derivada",
+    "Oposta à derivada/gradiente",
+    "Perpendicular ao eixo x",
+    "Aleatória"
+  ],
+  "resposta": "B",
+  "explicacao": "x ← x − η·f'(x): contra o crescimento, para minimizar.",
+  "autor": "Matheuslync"
+}

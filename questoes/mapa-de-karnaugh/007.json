@@ -1,0 +1,12 @@
+{
+  "pergunta": "Um grupo de 4 células em um mapa de 4 variáveis resulta em um termo com quantas variáveis?",
+  "alternativas": [
+    "1",
+    "2",
+    "3",
+    "4"
+  ],
+  "resposta": "B",
+  "explicacao": "Grupo de 2ᵏ células elimina k variáveis: 4 = 2² elimina 2 → sobram 2.",
+  "autor": "Matheuslync"
+}

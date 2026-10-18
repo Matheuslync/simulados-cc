@@ -1,0 +1,12 @@
+{
+  "pergunta": "O limite de Betz diz que uma turbina eólica aproveita no máximo:",
+  "alternativas": [
+    "100%",
+    "~59,3%",
+    "~33%",
+    "~90%"
+  ],
+  "resposta": "B",
+  "explicacao": "Nenhuma turbina extrai mais que 59,3% da energia cinética do vento.",
+  "autor": "Matheuslync"
+}

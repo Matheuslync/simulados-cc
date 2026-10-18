@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual estrutura é mais adequada para um sistema de autocompletar palavras?",
+  "alternativas": [
+    "Heap",
+    "Trie",
+    "Fila",
+    "Tabela hash simples"
+  ],
+  "resposta": "B",
+  "explicacao": "A trie organiza as chaves por prefixo, permitindo listar todas as palavras que começam com um prefixo.",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,12 @@
+{
+  "pergunta": "Busca binária em um vetor ordenado de 1.024 elementos faz no máximo cerca de quantas comparações?",
+  "alternativas": [
+    "10",
+    "32",
+    "512",
+    "1024"
+  ],
+  "resposta": "A",
+  "explicacao": "log₂(1024) = 10.",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,14 @@
+{
+  "pergunta": "O que é impresso?",
+  "codigo": "arq = open(\"t.txt\", \"w+\")\narq.write(\"ABCDEFGH\")\narq.seek(2)\nprint(arq.read(3))\nprint(arq.tell())\narq.close()",
+  "linguagem": "python",
+  "alternativas": [
+    "CDE e 5",
+    "BCD e 4",
+    "CDE e 3",
+    "ABC e 3"
+  ],
+  "resposta": "A",
+  "explicacao": "seek(2) → cursor antes de 'C'; read(3) lê 'CDE'; cursor vai para 5.",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,12 @@
+{
+  "pergunta": "Um agente que aprende por recompensas e punições usa:",
+  "alternativas": [
+    "Aprendizado por reforço",
+    "Clustering",
+    "Regressão",
+    "Árvore AVL"
+  ],
+  "resposta": "A",
+  "explicacao": "Reforço: tentativa e erro guiada por recompensa.",
+  "autor": "Matheuslync"
+}

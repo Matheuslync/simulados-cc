@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual o tipo do valor retornado por input()?",
+  "alternativas": [
+    "int",
+    "float",
+    "str",
+    "depende do que for digitado"
+  ],
+  "resposta": "C",
+  "explicacao": "input() sempre retorna string; converta com int() ou float().",
+  "autor": "Matheuslync"
+}

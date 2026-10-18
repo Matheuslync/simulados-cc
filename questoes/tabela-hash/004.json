@@ -1,0 +1,12 @@
+{
+  "pergunta": "No encadeamento separado (separate chaining), cada posição da tabela guarda:",
+  "alternativas": [
+    "Apenas um elemento",
+    "Uma lista com os elementos que caíram ali",
+    "Um ponteiro para a raiz de uma heap",
+    "O índice da próxima posição livre"
+  ],
+  "resposta": "B",
+  "explicacao": "Cada bucket mantém uma lista (geralmente encadeada) dos elementos com aquele hash.",
+  "autor": "Matheuslync"
+}

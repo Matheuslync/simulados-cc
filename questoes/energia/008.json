@@ -1,0 +1,12 @@
+{
+  "pergunta": "Hidrelétrica reversível (bombeamento) é um tipo de armazenamento:",
+  "alternativas": [
+    "Químico",
+    "Mecânico (gravitacional)",
+    "Térmico",
+    "Eletroquímico"
+  ],
+  "resposta": "B",
+  "explicacao": "Bombeia água para o reservatório alto e depois turbina de volta.",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,12 @@
+{
+  "pergunta": "Pelo teorema de De Morgan, (A·B)' é igual a:",
+  "alternativas": [
+    "A'·B'",
+    "A' + B'",
+    "A + B",
+    "(A + B)'"
+  ],
+  "resposta": "B",
+  "explicacao": "(AB)' = A' + B'.",
+  "autor": "Matheuslync"
+}

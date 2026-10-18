@@ -1,0 +1,12 @@
+{
+  "pergunta": "A segunda geração de computadores é marcada pelo uso de:",
+  "alternativas": [
+    "Válvulas",
+    "Transistores",
+    "Circuitos integrados",
+    "Microprocessadores VLSI"
+  ],
+  "resposta": "B",
+  "explicacao": "1ª válvulas, 2ª transistores, 3ª circuitos integrados, 4ª VLSI/microprocessador.",
+  "autor": "Matheuslync"
+}

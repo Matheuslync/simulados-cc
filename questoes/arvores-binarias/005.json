@@ -1,0 +1,12 @@
+{
+  "pergunta": "Em uma árvore Red-Black, qual regra é verdadeira?",
+  "alternativas": [
+    "Todo nó novo entra preto",
+    "Dois nós vermelhos podem ser consecutivos",
+    "A raiz é sempre preta",
+    "Pode haver ciclos"
+  ],
+  "resposta": "C",
+  "explicacao": "Raiz preta, nenhum vermelho com filho vermelho, mesmo nº de pretos em todo caminho.",
+  "autor": "Matheuslync"
+}

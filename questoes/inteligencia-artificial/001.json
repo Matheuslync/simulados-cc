@@ -1,0 +1,12 @@
+{
+  "pergunta": "Agrupar clientes por semelhança, sem rótulos prévios, é um problema de:",
+  "alternativas": [
+    "Aprendizado supervisionado",
+    "Aprendizado não supervisionado (clustering)",
+    "Aprendizado por reforço",
+    "Regressão linear"
+  ],
+  "resposta": "B",
+  "explicacao": "Sem rótulos → não supervisionado.",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,12 @@
+{
+  "pergunta": "O que tende a acontecer com uma taxa de aprendizado (η) muito grande?",
+  "alternativas": [
+    "Converge mais devagar",
+    "Pode oscilar ou divergir",
+    "Sempre acha o mínimo global",
+    "Não muda nada"
+  ],
+  "resposta": "B",
+  "explicacao": "Passos grandes demais 'pulam' o mínimo e podem divergir.",
+  "autor": "Matheuslync"
+}

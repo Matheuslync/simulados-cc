@@ -1,0 +1,12 @@
+{
+  "pergunta": "Inserir 10, 20, 30, 40, 50 (nessa ordem) em uma BST comum gera:",
+  "alternativas": [
+    "Árvore perfeitamente balanceada",
+    "Árvore degenerada com busca O(n)",
+    "Uma AVL",
+    "Um heap"
+  ],
+  "resposta": "B",
+  "explicacao": "Tudo vai para a direita: vira uma lista, altura n, busca O(n).",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,12 @@
+{
+  "pergunta": "Sobre o heap sort, é correto afirmar:",
+  "alternativas": [
+    "É estável e usa O(n) de memória extra",
+    "Tem O(n log n) no pior caso e ordena in-place",
+    "Tem O(n²) no pior caso como o quick sort",
+    "Exige vetor previamente ordenado"
+  ],
+  "resposta": "B",
+  "explicacao": "Heap sort: O(n log n) em todos os casos, in-place, não estável.",
+  "autor": "Matheuslync"
+}

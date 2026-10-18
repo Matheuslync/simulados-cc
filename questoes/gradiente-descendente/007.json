@@ -1,0 +1,12 @@
+{
+  "pergunta": "A derivada de f(x) = 3x² + 2x é:",
+  "alternativas": [
+    "6x + 2",
+    "3x + 2",
+    "6x² + 2",
+    "x³ + x²"
+  ],
+  "resposta": "A",
+  "explicacao": "(3x²)' = 6x; (2x)' = 2.",
+  "autor": "Matheuslync"
+}

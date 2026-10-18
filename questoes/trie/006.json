@@ -1,0 +1,12 @@
+{
+  "pergunta": "No roteamento de mensagens/pacotes, a busca do 'maior prefixo correspondente' costuma usar:",
+  "alternativas": [
+    "Trie",
+    "Pilha",
+    "Bubble sort",
+    "Fila circular"
+  ],
+  "resposta": "A",
+  "explicacao": "Longest prefix match em roteadores é implementado com tries (árvores de prefixos).",
+  "autor": "Matheuslync"
+}

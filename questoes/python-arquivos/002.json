@@ -1,0 +1,14 @@
+{
+  "pergunta": "O que é impresso?",
+  "codigo": "arq = open(\"t.txt\", \"w+\")\narq.write(\"Aurora\")\nprint(repr(arq.read()))\narq.close()",
+  "linguagem": "python",
+  "alternativas": [
+    "'Aurora'",
+    "''",
+    "'A'",
+    "Erro"
+  ],
+  "resposta": "B",
+  "explicacao": "Após escrever, o cursor fica no fim; read() a partir dali devolve string vazia.",
+  "autor": "Matheuslync"
+}

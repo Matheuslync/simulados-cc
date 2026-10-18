@@ -1,0 +1,12 @@
+{
+  "pergunta": "F(A,B,C) = Σm(0,2,4,6). A expressão mínima é:",
+  "alternativas": [
+    "A'",
+    "B'",
+    "C'",
+    "A'C'"
+  ],
+  "resposta": "C",
+  "explicacao": "Em todos esses mintermos C = 0 (000, 010, 100, 110) → F = C'.",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual estrutura do Python é implementada como tabela hash?",
+  "alternativas": [
+    "list",
+    "tuple",
+    "dict",
+    "str"
+  ],
+  "resposta": "C",
+  "explicacao": "dict (e set) usam tabela hash internamente.",
+  "autor": "Matheuslync"
+}

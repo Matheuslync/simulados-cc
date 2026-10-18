@@ -1,0 +1,12 @@
+{
+  "pergunta": "Se a velocidade do vento dobra, a potência disponível:",
+  "alternativas": [
+    "Dobra",
+    "Quadruplica",
+    "Fica 8 vezes maior",
+    "Não muda"
+  ],
+  "resposta": "C",
+  "explicacao": "P ∝ v³ → 2³ = 8.",
+  "autor": "Matheuslync"
+}

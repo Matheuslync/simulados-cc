@@ -1,0 +1,12 @@
+{
+  "pergunta": "A segunda lei da termodinâmica implica que:",
+  "alternativas": [
+    "Energia pode ser criada",
+    "Toda conversão de energia tem perdas",
+    "Eficiência de 100% é comum",
+    "A energia se conserva"
+  ],
+  "resposta": "B",
+  "explicacao": "Entropia: sempre há perdas (a conservação é a 1ª lei).",
+  "autor": "Matheuslync"
+}

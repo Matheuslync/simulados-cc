@@ -1,0 +1,14 @@
+{
+  "pergunta": "O que é impresso?",
+  "codigo": "l = [3, 1, 3, 2]\nl.append(3)\nprint(l.count(3), len(l), l[-1])",
+  "linguagem": "python",
+  "alternativas": [
+    "2 4 2",
+    "3 5 3",
+    "3 4 3",
+    "2 5 3"
+  ],
+  "resposta": "B",
+  "explicacao": "Depois do append: [3,1,3,2,3] → count(3)=3, len=5, último=3.",
+  "autor": "Matheuslync"
+}

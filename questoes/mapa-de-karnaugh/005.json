@@ -1,0 +1,12 @@
+{
+  "pergunta": "F(A,B,C,D) = Σm(5,7,13,15). Expressão mínima:",
+  "alternativas": [
+    "BD",
+    "AB",
+    "CD",
+    "B'D'"
+  ],
+  "resposta": "A",
+  "explicacao": "0101, 0111, 1101, 1111: B=1 e D=1 sempre → BD.",
+  "autor": "Matheuslync"
+}

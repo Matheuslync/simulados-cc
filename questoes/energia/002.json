@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual é o valor ideal (teórico) de PUE?",
+  "alternativas": [
+    "0",
+    "1,0",
+    "2,0",
+    "100"
+  ],
+  "resposta": "B",
+  "explicacao": "1,0 = toda a energia vai para os equipamentos de TI.",
+  "autor": "Matheuslync"
+}

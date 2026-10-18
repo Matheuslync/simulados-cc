@@ -1,0 +1,12 @@
+{
+  "pergunta": "Em um heap, qual afirmação é FALSA?",
+  "alternativas": [
+    "É uma árvore binária quase completa",
+    "Os elementos estão totalmente ordenados",
+    "Pode ser guardado em um vetor",
+    "A raiz é o máximo (max-heap) ou mínimo (min-heap)"
+  ],
+  "resposta": "B",
+  "explicacao": "O heap só garante ordem entre pai e filho, não ordenação total.",
+  "autor": "Matheuslync"
+}

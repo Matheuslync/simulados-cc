@@ -1,0 +1,12 @@
+{
+  "pergunta": "O algoritmo de Dijkstra NÃO funciona corretamente quando:",
+  "alternativas": [
+    "O grafo é direcionado",
+    "Existem pesos negativos",
+    "O grafo é esparso",
+    "Há mais de 100 vértices"
+  ],
+  "resposta": "B",
+  "explicacao": "Dijkstra exige pesos não negativos.",
+  "autor": "Matheuslync"
+}

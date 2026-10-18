@@ -1,0 +1,12 @@
+{
+  "pergunta": "F(A,B,C,D) = Σm(0,2,8,10) (os 4 cantos do mapa). Expressão mínima:",
+  "alternativas": [
+    "A'C'",
+    "B'D'",
+    "BD",
+    "A'B'"
+  ],
+  "resposta": "B",
+  "explicacao": "0000, 0010, 1000, 1010: B=0 e D=0 → B'D'. Cantos são vizinhos pelas bordas.",
+  "autor": "Matheuslync"
+}

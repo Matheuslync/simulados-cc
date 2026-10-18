@@ -1,0 +1,12 @@
+{
+  "pergunta": "Com h(k) = k mod 10, em que posição fica a chave 47?",
+  "alternativas": [
+    "4",
+    "7",
+    "47",
+    "0"
+  ],
+  "resposta": "B",
+  "explicacao": "47 mod 10 = 7.",
+  "autor": "Matheuslync"
+}

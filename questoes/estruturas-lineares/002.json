@@ -1,0 +1,12 @@
+{
+  "pergunta": "A busca em largura (BFS) usa qual estrutura auxiliar?",
+  "alternativas": [
+    "Pilha",
+    "Fila",
+    "Heap",
+    "Trie"
+  ],
+  "resposta": "B",
+  "explicacao": "BFS usa fila (FIFO); DFS usa pilha/recursão.",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual a ordem correta das colunas em um mapa de Karnaugh de 2 variáveis (BC)?",
+  "alternativas": [
+    "00, 01, 10, 11",
+    "00, 01, 11, 10",
+    "00, 10, 01, 11",
+    "11, 10, 01, 00"
+  ],
+  "resposta": "B",
+  "explicacao": "Código Gray: vizinhos diferem em apenas 1 bit.",
+  "autor": "Matheuslync"
+}

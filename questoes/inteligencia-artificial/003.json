@@ -1,0 +1,12 @@
+{
+  "pergunta": "Um modelo com ótimo desempenho no treino e ruim em dados novos sofre de:",
+  "alternativas": [
+    "Underfitting",
+    "Overfitting",
+    "Normalização",
+    "Balanceamento"
+  ],
+  "resposta": "B",
+  "explicacao": "Overfitting: decorou os dados de treino.",
+  "autor": "Matheuslync"
+}

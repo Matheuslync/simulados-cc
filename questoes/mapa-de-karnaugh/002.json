@@ -1,0 +1,12 @@
+{
+  "pergunta": "Quais tamanhos de grupo são válidos no mapa de Karnaugh?",
+  "alternativas": [
+    "1, 2, 3, 4",
+    "1, 2, 4, 8",
+    "2, 3, 6",
+    "Qualquer tamanho retangular"
+  ],
+  "resposta": "B",
+  "explicacao": "Somente potências de 2.",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,12 @@
+{
+  "pergunta": "Precisão (precision) em classificação é:",
+  "alternativas": [
+    "VP / (VP + FN)",
+    "VP / (VP + FP)",
+    "(VP+VN)/total",
+    "FP / (FP + VN)"
+  ],
+  "resposta": "B",
+  "explicacao": "Dos que o modelo disse positivo, quantos eram positivos. Recall = VP/(VP+FN).",
+  "autor": "Matheuslync"
+}

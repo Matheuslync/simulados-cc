@@ -1,0 +1,12 @@
+{
+  "pergunta": "Em um max-heap, onde está garantidamente o maior elemento?",
+  "alternativas": [
+    "Na raiz",
+    "Na folha mais à direita",
+    "No meio do vetor",
+    "Em qualquer folha"
+  ],
+  "resposta": "A",
+  "explicacao": "A propriedade do max-heap (pai ≥ filhos) garante que o maior valor fica na raiz.",
+  "autor": "Matheuslync"
+}

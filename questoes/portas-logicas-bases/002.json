@@ -1,0 +1,12 @@
+{
+  "pergunta": "Uma tabela-verdade com 4 variáveis de entrada tem quantas linhas?",
+  "alternativas": [
+    "4",
+    "8",
+    "16",
+    "32"
+  ],
+  "resposta": "C",
+  "explicacao": "2⁴ = 16.",
+  "autor": "Matheuslync"
+}

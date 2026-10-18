@@ -1,0 +1,12 @@
+{
+  "pergunta": "f(x) = x², x₀ = 3, η = 0,1. Quanto vale x₁?",
+  "alternativas": [
+    "2,4",
+    "2,7",
+    "3,6",
+    "0,6"
+  ],
+  "resposta": "A",
+  "explicacao": "f'(x) = 2x = 6 → x₁ = 3 − 0,1·6 = 2,4.",
+  "autor": "Matheuslync"
+}

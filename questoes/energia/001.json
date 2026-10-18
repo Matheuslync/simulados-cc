@@ -1,0 +1,12 @@
+{
+  "pergunta": "Um data center consome 1.500 kWh no total, dos quais 1.000 kWh vão para TI. O PUE é:",
+  "alternativas": [
+    "0,67",
+    "1,5",
+    "2,5",
+    "500"
+  ],
+  "resposta": "B",
+  "explicacao": "PUE = total / TI = 1500/1000 = 1,5. Ideal = 1,0.",
+  "autor": "Matheuslync"
+}

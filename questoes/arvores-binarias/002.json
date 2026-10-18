@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual percurso de uma BST devolve os elementos em ordem crescente?",
+  "alternativas": [
+    "Pré-ordem",
+    "Em ordem (in-order)",
+    "Pós-ordem",
+    "Em largura"
+  ],
+  "resposta": "B",
+  "explicacao": "In-order: esquerda, raiz, direita → crescente.",
+  "autor": "Matheuslync"
+}

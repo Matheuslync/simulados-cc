@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual algoritmo tem pior caso O(n²) mas média O(n log n)?",
+  "alternativas": [
+    "Merge sort",
+    "Heap sort",
+    "Quick sort",
+    "Busca binária"
+  ],
+  "resposta": "C",
+  "explicacao": "Quick sort degrada para O(n²) com pivôs ruins.",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,12 @@
+{
+  "pergunta": "Em def soma(a, b): ..., e na chamada soma(2, 3), 'a' e 'b' são parâmetros:",
+  "alternativas": [
+    "reais",
+    "formais",
+    "globais",
+    "default"
+  ],
+  "resposta": "B",
+  "explicacao": "Os da definição são formais; os valores passados (2, 3) são os reais/argumentos.",
+  "autor": "Matheuslync"
+}

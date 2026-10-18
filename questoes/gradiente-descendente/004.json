@@ -1,0 +1,12 @@
+{
+  "pergunta": "E com η muito pequeno?",
+  "alternativas": [
+    "Diverge",
+    "Precisa de muitas iterações para convergir",
+    "Encontra o máximo",
+    "Para no primeiro passo"
+  ],
+  "resposta": "B",
+  "explicacao": "Passos minúsculos → convergência lenta.",
+  "autor": "Matheuslync"
+}

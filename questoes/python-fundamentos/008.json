@@ -1,0 +1,14 @@
+{
+  "pergunta": "O que é impresso?",
+  "codigo": "a = [1, 2]\nb = a\nb.append(3)\nprint(a, a is b)",
+  "linguagem": "python",
+  "alternativas": [
+    "[1, 2] False",
+    "[1, 2, 3] True",
+    "[1, 2, 3] False",
+    "[1, 2] True"
+  ],
+  "resposta": "B",
+  "explicacao": "b = a não copia: os dois nomes apontam para a mesma lista. 'is' testa identidade → True.",
+  "autor": "Matheuslync"
+}

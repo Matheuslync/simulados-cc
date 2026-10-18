@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual é o custo MÉDIO de busca em uma tabela hash bem dimensionada?",
+  "alternativas": [
+    "O(1)",
+    "O(log n)",
+    "O(n)",
+    "O(n²)"
+  ],
+  "resposta": "A",
+  "explicacao": "Com boa função hash e fator de carga controlado, a busca é O(1) em média (pior caso O(n)).",
+  "autor": "Matheuslync"
+}

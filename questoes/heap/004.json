@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual estrutura é a mais indicada para implementar uma fila de prioridade?",
+  "alternativas": [
+    "Pilha",
+    "Lista encadeada simples",
+    "Heap",
+    "Trie"
+  ],
+  "resposta": "C",
+  "explicacao": "Heap dá acesso ao maior/menor em O(1) e insere/remove em O(log n).",
+  "autor": "Matheuslync"
+}

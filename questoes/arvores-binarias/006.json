@@ -1,0 +1,12 @@
+{
+  "pergunta": "Comparando AVL e Red-Black:",
+  "alternativas": [
+    "AVL é mais rígida, buscas mais rápidas, mais rotações",
+    "Red-Black é mais rígida",
+    "Ambas têm O(n) no pior caso",
+    "AVL não usa rotações"
+  ],
+  "resposta": "A",
+  "explicacao": "AVL: altura menor (≈1,44 log n) mas mais rotações; RB: mais relaxada (≤2 log n), menos rotações.",
+  "autor": "Matheuslync"
+}

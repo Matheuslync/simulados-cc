@@ -1,0 +1,12 @@
+{
+  "pergunta": "O que acontece com o conteúdo antigo ao abrir um arquivo existente com \"w\"?",
+  "alternativas": [
+    "É preservado",
+    "É apagado",
+    "Fica em modo leitura",
+    "É duplicado"
+  ],
+  "resposta": "B",
+  "explicacao": "\"w\" recria o arquivo do zero.",
+  "autor": "Matheuslync"
+}

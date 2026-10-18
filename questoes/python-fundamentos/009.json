@@ -1,0 +1,14 @@
+{
+  "pergunta": "O que é impresso?",
+  "codigo": "x = 10\nif x > 5 and x < 8:\n    print(\"A\")\nelif x >= 10:\n    print(\"B\")\nelse:\n    print(\"C\")",
+  "linguagem": "python",
+  "alternativas": [
+    "A",
+    "B",
+    "C",
+    "A e B"
+  ],
+  "resposta": "B",
+  "explicacao": "Primeira condição falsa (x<8 é falso); elif x>=10 é verdadeiro → B.",
+  "autor": "Matheuslync"
+}

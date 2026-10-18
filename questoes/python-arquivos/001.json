@@ -1,0 +1,14 @@
+{
+  "pergunta": "Qual o valor de n?",
+  "codigo": "arq = open(\"t.txt\", \"w\")\nn = arq.write(\"Marte\\n\")\narq.close()\nprint(n)",
+  "linguagem": "python",
+  "alternativas": [
+    "5",
+    "6",
+    "7",
+    "None"
+  ],
+  "resposta": "B",
+  "explicacao": "write retorna o nº de caracteres gravados: 'Marte' (5) + '\\n' (1) = 6.",
+  "autor": "Matheuslync"
+}

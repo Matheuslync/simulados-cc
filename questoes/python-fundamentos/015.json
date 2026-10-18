@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual é o resultado de 2 + 3 * 2 ** 2?",
+  "alternativas": [
+    "14",
+    "20",
+    "100",
+    "26"
+  ],
+  "resposta": "A",
+  "explicacao": "Potência primeiro (4), depois * (12), depois + → 14.",
+  "autor": "Matheuslync"
+}

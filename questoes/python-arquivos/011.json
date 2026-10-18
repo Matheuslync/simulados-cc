@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual a vantagem de usar 'with open(...) as f'?",
+  "alternativas": [
+    "Lê mais rápido",
+    "Fecha o arquivo automaticamente",
+    "Permite só leitura",
+    "Converte para JSON"
+  ],
+  "resposta": "B",
+  "explicacao": "O gerenciador de contexto fecha o arquivo ao sair do bloco, mesmo com erro.",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,12 @@
+{
+  "pergunta": "Quanto vale 1101₂ em decimal?",
+  "alternativas": [
+    "11",
+    "13",
+    "14",
+    "15"
+  ],
+  "resposta": "B",
+  "explicacao": "8+4+0+1 = 13.",
+  "autor": "Matheuslync"
+}

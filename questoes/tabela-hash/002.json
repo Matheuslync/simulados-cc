@@ -1,0 +1,12 @@
+{
+  "pergunta": "Tabela de tamanho 7, h(k)=k mod 7, sondagem linear. Inserindo 10, 17 e 24 nessa ordem, onde fica o 24?",
+  "alternativas": [
+    "Posição 3",
+    "Posição 4",
+    "Posição 5",
+    "Posição 6"
+  ],
+  "resposta": "C",
+  "explicacao": "10→3; 17 mod 7 = 3 (ocupada) → 4; 24 mod 7 = 3 (ocupada), 4 (ocupada) → 5.",
+  "autor": "Matheuslync"
+}

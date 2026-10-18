@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual modo abre o arquivo para escrever no FINAL, sem apagar o conteúdo?",
+  "alternativas": [
+    "\"w\"",
+    "\"a\"",
+    "\"x\"",
+    "\"r\""
+  ],
+  "resposta": "B",
+  "explicacao": "\"a\" (append).",
+  "autor": "Matheuslync"
+}

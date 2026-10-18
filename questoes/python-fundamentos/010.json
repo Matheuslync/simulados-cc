@@ -1,0 +1,14 @@
+{
+  "pergunta": "O que é impresso?",
+  "codigo": "d = {\"sol\": 3, \"vento\": 5}\nd[\"agua\"] = 2\nprint(len(d), d.get(\"lua\", 0))",
+  "linguagem": "python",
+  "alternativas": [
+    "3 0",
+    "2 None",
+    "3 None",
+    "Erro"
+  ],
+  "resposta": "A",
+  "explicacao": "3 chaves; get com default 0 para chave inexistente.",
+  "autor": "Matheuslync"
+}

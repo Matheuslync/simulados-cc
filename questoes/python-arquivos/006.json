@@ -1,0 +1,12 @@
+{
+  "pergunta": "O que acontece ao abrir com \"x\" um arquivo que já existe?",
+  "alternativas": [
+    "Apaga e recria",
+    "Escreve no final",
+    "Lança erro (FileExistsError)",
+    "Abre para leitura"
+  ],
+  "resposta": "C",
+  "explicacao": "\"x\" é criação exclusiva: erro se o arquivo já existe.",
+  "autor": "Matheuslync"
+}

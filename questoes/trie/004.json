@@ -1,0 +1,12 @@
+{
+  "pergunta": "Por que uma trie precisa de um marcador de 'fim de palavra'?",
+  "alternativas": [
+    "Para economizar memória",
+    "Para distinguir palavras que são prefixo de outras (ex.: 'car' e 'carro')",
+    "Para ordenar os filhos",
+    "Para balancear a árvore"
+  ],
+  "resposta": "B",
+  "explicacao": "Sem o marcador não dá para saber se 'car' foi inserida ou é só prefixo de 'carro'.",
+  "autor": "Matheuslync"
+}

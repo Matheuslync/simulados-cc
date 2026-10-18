@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual a diferença entre função e procedimento?",
+  "alternativas": [
+    "Função não aceita parâmetros",
+    "Procedimento retorna valor e função não",
+    "Função retorna valor; procedimento não",
+    "Não há diferença"
+  ],
+  "resposta": "C",
+  "explicacao": "Função devolve resultado com return; procedimento só executa ações.",
+  "autor": "Matheuslync"
+}

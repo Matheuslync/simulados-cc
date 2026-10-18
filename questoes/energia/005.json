@@ -1,0 +1,12 @@
+{
+  "pergunta": "Um sistema fotovoltaico off-grid precisa obrigatoriamente de:",
+  "alternativas": [
+    "Ligação com a distribuidora",
+    "Armazenamento (baterias)",
+    "Turbina eólica",
+    "Inversor de frequência para motor"
+  ],
+  "resposta": "B",
+  "explicacao": "Sem rede, a energia excedente precisa ser guardada para a noite.",
+  "autor": "Matheuslync"
+}

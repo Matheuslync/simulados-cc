@@ -1,0 +1,14 @@
+{
+  "pergunta": "O que é impresso?",
+  "codigo": "n = 5\nc = 0\nwhile n > 0:\n    n -= 2\n    c += 1\nprint(c, n)",
+  "linguagem": "python",
+  "alternativas": [
+    "2 1",
+    "3 -1",
+    "3 1",
+    "2 -1"
+  ],
+  "resposta": "B",
+  "explicacao": "n: 5→3→1→-1; três voltas → c = 3, n = -1.",
+  "autor": "Matheuslync"
+}

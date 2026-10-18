@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual estrutura de dados do Python é imutável?",
+  "alternativas": [
+    "list",
+    "dict",
+    "tuple",
+    "set"
+  ],
+  "resposta": "C",
+  "explicacao": "Tuplas não podem ser alteradas depois de criadas.",
+  "autor": "Matheuslync"
+}

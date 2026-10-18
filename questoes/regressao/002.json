@@ -1,0 +1,12 @@
+{
+  "pergunta": "O método dos mínimos quadrados escolhe os coeficientes que minimizam:",
+  "alternativas": [
+    "A soma dos resíduos",
+    "A soma dos quadrados dos resíduos",
+    "O número de variáveis",
+    "O R²"
+  ],
+  "resposta": "B",
+  "explicacao": "Minimiza Σ(yᵢ − ŷᵢ)².",
+  "autor": "Matheuslync"
+}

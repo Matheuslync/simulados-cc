@@ -1,0 +1,12 @@
+{
+  "pergunta": "O gradiente de uma função de várias variáveis é:",
+  "alternativas": [
+    "Um número sempre positivo",
+    "O vetor das derivadas parciais, apontando para o maior crescimento",
+    "A integral da função",
+    "O valor mínimo da função"
+  ],
+  "resposta": "B",
+  "explicacao": "∇f reúne as derivadas parciais e aponta para onde f cresce mais rápido.",
+  "autor": "Matheuslync"
+}

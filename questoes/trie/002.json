@@ -1,0 +1,12 @@
+{
+  "pergunta": "Em uma trie, o custo de buscar uma palavra de tamanho L é:",
+  "alternativas": [
+    "O(log n), n = nº de palavras",
+    "O(n)",
+    "O(L)",
+    "O(1) sempre"
+  ],
+  "resposta": "C",
+  "explicacao": "Percorre um nó por caractere: O(L), independente do número de palavras armazenadas.",
+  "autor": "Matheuslync"
+}

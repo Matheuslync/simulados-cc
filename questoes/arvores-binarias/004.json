@@ -1,0 +1,12 @@
+{
+  "pergunta": "Na árvore AVL, o fator de balanceamento de cada nó deve estar em:",
+  "alternativas": [
+    "{0}",
+    "{-1, 0, 1}",
+    "{-2, ..., 2}",
+    "qualquer valor"
+  ],
+  "resposta": "B",
+  "explicacao": "BF = h(esq) − h(dir) ∈ {−1, 0, 1}; fora disso aplica-se rotação.",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,12 @@
+{
+  "pergunta": "O fator de carga de uma tabela hash é:",
+  "alternativas": [
+    "nº de colisões / n",
+    "n / m (elementos / tamanho da tabela)",
+    "m / n",
+    "altura da tabela"
+  ],
+  "resposta": "B",
+  "explicacao": "α = n/m. Quando cresce muito, faz-se rehash para uma tabela maior.",
+  "autor": "Matheuslync"
+}

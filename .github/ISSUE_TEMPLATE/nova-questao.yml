@@ -1,0 +1,78 @@
+name: Sugerir questão
+description: Envie uma questão sem precisar usar git. Alguém do projeto transforma em arquivo.
+title: "[questão] "
+labels: ["nova questão"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por contribuir! Use questões **escritas por você** (ou adaptadas com suas palavras).
+        Não copie questões do FIAP ON (Fast tests, Quizzes, provas): elas têm direitos autorais.
+  - type: dropdown
+    id: materia
+    attributes:
+      label: Matéria
+      options:
+        - heap
+        - trie
+        - tabela-hash
+        - arvores-binarias
+        - mapa-de-karnaugh
+        - python-arquivos
+        - python-fundamentos
+        - gradiente-descendente
+        - energia
+        - sustentabilidade
+        - inteligencia-artificial
+        - regressao
+        - estruturas-lineares
+        - complexidade-ordenacao
+        - grafos
+        - portas-logicas-bases
+        - historia-hardware
+        - Outra (explique na pergunta)
+    validations:
+      required: true
+  - type: textarea
+    id: pergunta
+    attributes:
+      label: Pergunta
+    validations:
+      required: true
+  - type: textarea
+    id: codigo
+    attributes:
+      label: Código (opcional)
+      description: Se a questão tiver um trecho de código, cole aqui.
+      render: python
+  - type: textarea
+    id: alternativas
+    attributes:
+      label: Alternativas
+      description: Uma por linha, de 2 a 6, na ordem A, B, C…
+      placeholder: |
+        O(1)
+        O(log n)
+        O(n)
+        O(n log n)
+    validations:
+      required: true
+  - type: dropdown
+    id: resposta
+    attributes:
+      label: Alternativa correta
+      options: [A, B, C, D, E, F]
+    validations:
+      required: true
+  - type: textarea
+    id: explicacao
+    attributes:
+      label: Explicação
+      description: Por que essa é a correta? Uma ou duas frases bastam.
+    validations:
+      required: true
+  - type: input
+    id: fase
+    attributes:
+      label: Fase (opcional)
+      placeholder: "4"

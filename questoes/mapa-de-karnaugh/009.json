@@ -1,0 +1,12 @@
+{
+  "pergunta": "Para que serve o mapa de Karnaugh?",
+  "alternativas": [
+    "Converter decimal em binário",
+    "Simplificar expressões booleanas",
+    "Ordenar vetores",
+    "Calcular derivadas"
+  ],
+  "resposta": "B",
+  "explicacao": "É um método gráfico de minimização de expressões/circuitos lógicos.",
+  "autor": "Matheuslync"
+}

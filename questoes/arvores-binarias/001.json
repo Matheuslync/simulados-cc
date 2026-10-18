@@ -1,0 +1,12 @@
+{
+  "pergunta": "Inserindo 30, 20, 40, 10, 25 em uma BST, quem é o filho direito de 20?",
+  "alternativas": [
+    "10",
+    "25",
+    "40",
+    "30"
+  ],
+  "resposta": "B",
+  "explicacao": "25 < 30 vai para a esquerda; 25 > 20 vai para a direita de 20.",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual a complexidade de remover o topo de um heap com n elementos?",
+  "alternativas": [
+    "O(1)",
+    "O(log n)",
+    "O(n)",
+    "O(n log n)"
+  ],
+  "resposta": "B",
+  "explicacao": "Troca a raiz pelo último e desce (heapify) pela altura da árvore: O(log n).",
+  "autor": "Matheuslync"
+}

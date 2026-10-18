@@ -1,0 +1,12 @@
+{
+  "pergunta": "Pela álgebra de Boole, A + A·B é igual a:",
+  "alternativas": [
+    "B",
+    "A·B",
+    "A",
+    "A + B"
+  ],
+  "resposta": "C",
+  "explicacao": "Lei da absorção: A + AB = A.",
+  "autor": "Matheuslync"
+}

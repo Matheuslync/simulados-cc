@@ -1,0 +1,12 @@
+{
+  "pergunta": "Quando duas chaves diferentes geram o mesmo índice, temos:",
+  "alternativas": [
+    "Overflow",
+    "Colisão",
+    "Rotação",
+    "Rehash obrigatório"
+  ],
+  "resposta": "B",
+  "explicacao": "Isso é uma colisão, tratada por encadeamento ou endereçamento aberto.",
+  "autor": "Matheuslync"
+}

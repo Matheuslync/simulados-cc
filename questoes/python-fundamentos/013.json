@@ -1,0 +1,14 @@
+{
+  "pergunta": "O que é impresso?",
+  "codigo": "s = \"computacao\"\nprint(s[0:3], s[-1], len(s))",
+  "linguagem": "python",
+  "alternativas": [
+    "com o 10",
+    "comp o 10",
+    "com c 9",
+    "co o 10"
+  ],
+  "resposta": "A",
+  "explicacao": "Fatia 0:3 pega índices 0,1,2 → 'com'; último 'o'; 10 letras.",
+  "autor": "Matheuslync"
+}

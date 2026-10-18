@@ -1,0 +1,14 @@
+{
+  "pergunta": "Qual o total impresso?",
+  "codigo": "arq = open(\"t.txt\", \"w\")\ntotal = 0\nfor p in [\"sol\", \"vento\", \"agua\"]:\n    total += arq.write(p)\narq.close()\nprint(total)",
+  "linguagem": "python",
+  "alternativas": [
+    "3",
+    "11",
+    "12",
+    "None"
+  ],
+  "resposta": "C",
+  "explicacao": "3 + 5 + 4 = 12 caracteres gravados.",
+  "autor": "Matheuslync"
+}

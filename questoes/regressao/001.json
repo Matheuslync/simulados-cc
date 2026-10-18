@@ -1,0 +1,12 @@
+{
+  "pergunta": "A regressão logística é usada principalmente para:",
+  "alternativas": [
+    "Prever valores contínuos",
+    "Classificação (ex.: sim/não)",
+    "Agrupar sem rótulos",
+    "Ordenar vetores"
+  ],
+  "resposta": "B",
+  "explicacao": "Saída da sigmoide = probabilidade de uma classe.",
+  "autor": "Matheuslync"
+}

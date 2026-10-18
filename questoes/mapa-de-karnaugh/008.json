@@ -1,0 +1,12 @@
+{
+  "pergunta": "F(A,B,C) = Σm(3,7). Expressão mínima:",
+  "alternativas": [
+    "BC",
+    "AB",
+    "A'BC",
+    "C"
+  ],
+  "resposta": "A",
+  "explicacao": "011 e 111: B=1, C=1, A varia → BC.",
+  "autor": "Matheuslync"
+}

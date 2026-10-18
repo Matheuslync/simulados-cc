@@ -1,0 +1,12 @@
+{
+  "pergunta": "Uma desvantagem típica da trie em relação à tabela hash é:",
+  "alternativas": [
+    "Não permitir busca por prefixo",
+    "Maior consumo de memória",
+    "Busca sempre O(n)",
+    "Não armazenar strings"
+  ],
+  "resposta": "B",
+  "explicacao": "Cada nó guarda vários ponteiros para filhos, o que consome muita memória.",
+  "autor": "Matheuslync"
+}
