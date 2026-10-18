@@ -113,6 +113,28 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:16px}
 .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--surface)}
 .chip:disabled{opacity:.4;cursor:default}
 .chip .c{font:12px var(--f-mono);opacity:.75;margin-left:4px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:12px 0}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.tile .v{font:800 28px/1.1 var(--f-display);font-variant-numeric:tabular-nums}
+.tile .l{font:12px var(--f-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.grafico{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px 6px}
+.grafico svg{display:block;width:100%;height:auto;overflow:visible}
+.grafico .grid{stroke:var(--line);stroke-width:1}
+.grafico .eixo{fill:var(--muted);font:11px var(--f-mono)}
+.grafico .linha{fill:none;stroke:var(--accent);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.grafico .ponto{fill:var(--accent);stroke:var(--surface);stroke-width:2}
+.grafico .alvo{fill:transparent;cursor:pointer}
+.grafico .alvo:hover+.ponto,.grafico .alvo:focus+.ponto{r:7}
+.grafico .rot{fill:var(--fg);font:600 12px var(--f-mono)}
+.barras{display:grid;gap:8px;margin-top:8px}
+.barra{display:grid;grid-template-columns:minmax(0,1fr) 110px 70px;gap:10px;align-items:center;font-size:14px}
+.barra .trilho{height:10px;background:var(--code);border-radius:4px;overflow:hidden}
+.barra .trilho i{display:block;height:100%;background:var(--accent);border-radius:0 4px 4px 0}
+.barra .num{font:12px var(--f-mono);color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.hlist{display:grid;gap:0;border-top:1px solid var(--line);margin-top:8px}
+.hitem{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.hitem .pct{font:700 16px var(--f-mono);font-variant-numeric:tabular-nums}
+@media (max-width:520px){.barra{grid-template-columns:minmax(0,1fr) 70px 60px}.hitem{grid-template-columns:1fr auto}.hitem .btn{grid-column:1/-1;justify-self:start}}
 .guia{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px;font-size:14px}
 .guia h5{font:600 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
 .trecho{background:var(--accent-soft);border-radius:6px;padding:8px 12px;margin:0 0 8px;max-width:72ch}
@@ -134,7 +156,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:16px}
 .matriz{border-collapse:collapse;font-size:14px;margin:10px 0 6px}
 .matriz th,.matriz td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
 .matriz th:first-child,.matriz td:first-child{text-align:left;padding-left:0}
-.matriz td.on{color:var(--accent);font-weight:700}
+.matriz td.on{color:var(--accent);font:600 13px var(--f-mono);white-space:nowrap}
 .matriz td.on.tarde{color:var(--hot)}
 .matriz td.off{color:var(--line)}
 .matriz button{background:none;border:0;padding:0;color:var(--fg);font:500 14px var(--f-body);cursor:pointer;text-align:left}
@@ -156,6 +178,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:16px}
     <button role="tab" data-tab="treino">Treinar</button>
     <button role="tab" data-tab="simulado">Simulado</button>
     <button role="tab" data-tab="erros">Erros</button>
+    <button role="tab" data-tab="historico">Histórico</button>
   </nav>
 </div></header>
 
@@ -165,6 +188,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:16px}
   <section id="treino" role="tabpanel" hidden></section>
   <section id="simulado" role="tabpanel" hidden></section>
   <section id="erros" role="tabpanel" hidden></section>
+  <section id="historico" role="tabpanel" hidden></section>
   <footer class="small" id="rodape"></footer>
 </main>
 
@@ -215,7 +239,7 @@ function renderStats(){
 }
 
 const tabs=[...document.querySelectorAll("#tabs button")];
-function show(t){tabs.forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));document.querySelectorAll("main>section").forEach(s=>s.hidden=s.id!==t);store.set("tab",t);if(t==="erros")renderErros()}
+function show(t){tabs.forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));document.querySelectorAll("main>section").forEach(s=>s.hidden=s.id!==t);store.set("tab",t);if(t==="erros")renderErros();if(t==="historico"){histView=null;renderHistorico()}}
 tabs.forEach(b=>b.onclick=()=>{show(b.dataset.tab);window.scrollTo(0,0)});
 const cnt=id=>Q.filter(q=>q.materia===id).length;
 const RECORTES={"":"Todas as fases","1-4":"Fases 1 a 4","5-6":"Fases 5 e 6","1":"Fase 1","2":"Fase 2","3":"Fase 3","4":"Fase 4","5":"Fase 5","6":"Fase 6"};
@@ -299,9 +323,9 @@ function renderRoteiro(){
   ${BANCO.length?`<button class="btn" id="banco-limpar">Remover questões importadas</button>`:""}</div>
   <div id="banco-status" class="small" style="margin-top:8px">${(()=>{const i=store.get("bancoInfo",null);if(!BANCO.length)return 'Nenhuma questão importada. '+repoLink("#seu-banco-de-quest%C3%B5es","Veja o formato do arquivo")+'.';return `<b>${BANCO.length} questões importadas</b>${i?` de ${esc(i.arquivos.join(", "))} em ${esc(i.quando)}`:""}. Filtre por <b>Pessoal (local)</b> em Treinar ou Simulado.${i&&i.ignoradas.length?`<br>${i.ignoradas.length} ignoradas na última importação: ${esc(i.ignoradas.slice(0,5).join("; "))}${i.ignoradas.length>5?"…":""}`:""}`})()}</div>
   <h2>Em que fase está cada matéria</h2>
-  <p class="lead">Ainda não há consenso sobre o recorte: há quem diga que vale das fases 1 a 4 e há quem diga que entram também a 5 e a 6. A tabela mostra onde cada matéria aparece, para você decidir o que priorizar. <span class="fz">F1–F4</span> em azul, <span class="fz tarde">F5–F6</span> em laranja. Nos filtros de Treinar e Simulado dá para escolher o recorte.</p>
-  <div style="overflow-x:auto"><table class="matriz"><thead><tr><th>Matéria</th>${[1,2,3,4,5,6].map(f=>`<th class="${f===5?"sep":""}">F${f}</th>`).join("")}<th>Só em 5–6?</th></tr></thead><tbody>
-  ${MAT.slice().sort((a,b)=>b.prioridade-a.prioridade||a.ordem-b.ordem).map(m=>{const caps=f=>m.fiap.filter(l=>l.texto.includes("Fase "+f+" ")).map(l=>l.texto).join("\n");return `<tr><td><button data-res="${m.id}">${esc(m.titulo)}</button> <span class="pill p${m.prioridade}">${PRIO[m.prioridade]}</span></td>${[1,2,3,4,5,6].map(f=>m.fases.includes(f)?`<td class="on ${f>=5?"tarde":""} ${f===5?"sep":""}" title="${esc(caps(f))}">●</td>`:`<td class="off ${f===5?"sep":""}">·</td>`).join("")}<td class="small">${m.fases.length&&m.fases.every(f=>f>=5)?"<b>sim</b>":""}</td></tr>`}).join("")}
+  <p class="lead">Ainda não há consenso sobre o recorte: há quem diga que vale das fases 1 a 4 e há quem diga que entram também a 5 e a 6. A tabela mostra em que capítulo de cada fase a matéria aparece (C4 = Capítulo 4), para você decidir o que priorizar. Fases 1 a 4 em azul, 5 e 6 em laranja. Clique na matéria para abrir o resumo. Nos filtros de Treinar e Simulado dá para escolher o recorte.</p>
+  <div style="overflow-x:auto"><table class="matriz"><thead><tr><th>Matéria</th>${[1,2,3,4,5,6].map(f=>`<th class="${f===5?"sep":""}">Fase ${f}</th>`).join("")}</tr></thead><tbody>
+  ${MAT.slice().sort((a,b)=>b.prioridade-a.prioridade||a.ordem-b.ordem).map(m=>{const doF=f=>m.fiap.filter(l=>l.texto.includes("Fase "+f+" "));const caps=f=>doF(f).map(l=>l.texto).join("\n");const nums=f=>doF(f).map(l=>(l.texto.match(/Cap (\d+)/)||[])[1]).filter(Boolean);return `<tr><td><button data-res="${m.id}">${esc(m.titulo)}</button> <span class="pill p${m.prioridade}">${PRIO[m.prioridade]}</span></td>${[1,2,3,4,5,6].map(f=>m.fases.includes(f)?`<td class="on ${f>=5?"tarde":""} ${f===5?"sep":""}" title="${esc(caps(f))}">${nums(f).length?nums(f).map(n=>"C"+n).join(" "):"●"}</td>`:`<td class="off ${f===5?"sep":""}">·</td>`).join("")}</tr>`}).join("")}
   </tbody></table></div>
   <h2>Roteiro de estudo</h2>
   <p class="lead">Estude primeiro as matérias de prioridade <span class="pill p3">alta</span>: leia o resumo, treine as questões da matéria e feche com um simulado. Marque cada matéria quando se sentir seguro.</p>
@@ -425,13 +449,7 @@ function renderSim(){
     $("#sim-go").onclick=()=>{sim.list=buildSim();if(!sim.list.length)return;sim.ans={};sim.i=0;sim.done=false;sim.on=true;renderSim()};return;
   }
   if(sim.done){
-    const ok=sim.list.filter(q=>sim.ans[q.id]===q.resposta).length;
-    el.innerHTML=`<h2>Resultado</h2><div class="row" style="gap:20px"><div class="result">${ok}/${sim.list.length}</div><div class="lead">${Math.round(ok/sim.list.length*100)}% de acerto. Os erros foram para a aba Erros.</div></div>
-    <div class="row" style="margin-top:12px"><button class="btn primary" id="sim-new">Novo simulado</button></div>
-    ${revisarHTML(sim.list.filter(q=>sim.ans[q.id]!==q.resposta))}
-    <h3 style="margin-top:22px">Questão por questão</h3>
-    <div class="revlist">${sim.list.map((q,i)=>{const p=sim.ans[q.id],good=p===q.resposta;return `<div class="revitem ${good?"ok":"bad"}"><div class="small">${i+1}. ${esc((MBY[q.materia]||{}).titulo)}</div><div class="qtext" style="font-size:15px">${esc(q.pergunta)}</div>${q.codigo?`<pre><code>${esc(q.codigo)}</code></pre>`:""}
-      <div class="small">Sua resposta: <b>${p===undefined?"em branco":esc(q.alternativas[p])}</b></div><div class="small">Correta: <b>${esc(q.alternativas[q.resposta])}</b></div><div class="small" style="margin-top:4px">${esc(q.explicacao)}</div>${good?"":guiaHTML(q)}</div>`}).join("")}</div>`;
+    el.innerHTML=`<h2>Resultado</h2>${resultadoHTML(sim.list,sim.ans,`<button class="btn primary" id="sim-new">Novo simulado</button><button class="btn" data-irhist="1">Ver histórico</button>`)}`;
     $("#sim-new").onclick=()=>{sim.on=false;renderSim()};return;
   }
   const q=sim.list[sim.i],answered=Object.keys(sim.ans).length;
@@ -444,8 +462,79 @@ function renderSim(){
   const end=$("#sim-end");end.onclick=()=>{
     const blank=sim.list.length-Object.keys(sim.ans).length;
     if(blank&&end.dataset.c!=="1"){end.dataset.c="1";end.textContent=`Finalizar com ${blank} em branco?`;return}
-    sim.list.forEach(q=>record(q,sim.ans[q.id]===q.resposta));sim.done=true;renderSim()};
+    sim.list.forEach(q=>record(q,sim.ans[q.id]===q.resposta));salvarSimulado();sim.done=true;renderSim()};
 }
+
+// ---- resultado e histórico de simulados
+function resultadoHTML(list,ans,botoes){
+  const ok=list.filter(q=>ans[q.id]===q.resposta).length;
+  return `<div class="row" style="gap:20px"><div class="result">${ok}/${list.length}</div><div class="lead">${list.length?Math.round(ok/list.length*100):0}% de acerto.</div></div>
+    <div class="row" style="margin-top:12px">${botoes||""}</div>
+    ${revisarHTML(list.filter(q=>ans[q.id]!==q.resposta))}
+    <h3 style="margin-top:22px">Questão por questão</h3>
+    <div class="revlist">${list.map((q,i)=>{const p=ans[q.id],good=p===q.resposta;return `<div class="revitem ${good?"ok":"bad"}"><div class="small">${i+1}. ${esc((MBY[q.materia]||{}).titulo)}</div><div class="qtext" style="font-size:15px">${esc(q.pergunta)}</div>${q.codigo?`<pre><code>${esc(q.codigo)}</code></pre>`:""}
+      <div class="small">Sua resposta: <b>${p===undefined?"em branco":esc(q.alternativas[p])}</b></div><div class="small">Correta: <b>${esc(q.alternativas[q.resposta])}</b></div><div class="small" style="margin-top:4px">${esc(q.explicacao)}</div>${good?"":guiaHTML(q)}</div>`}).join("")}</div>`;
+}
+function salvarSimulado(){
+  const ok=sim.list.filter(q=>sim.ans[q.id]===q.resposta).length;
+  const h=store.get("simulados",[]);
+  h.push({t:Date.now(),n:sim.list.length,ok,recorte:sim.recorte||"",fonte:sim.fonte||"",itens:sim.list.map(q=>[q.id,sim.ans[q.id]??null])});
+  store.set("simulados",h.slice(-100));
+}
+let histView=null;
+const dataBR=t=>new Date(t).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"});
+const pct=(a,b)=>b?Math.round(a/b*100):0;
+const recorteTxt=r=>r?(RECORTES[r]||"Fases "+r.replace(/,/g,", ")):"Todas as fases";
+function graficoEvolucao(h){
+  if(h.length<2)return `<p class="small">O gráfico de evolução aparece a partir do segundo simulado.</p>`;
+  const W=600,H=180,L=34,R=40,T=14,B=26,n=h.length;
+  const x=i=>L+(n===1?0:(W-L-R)*i/(n-1)),y=v=>T+(H-T-B)*(1-v/100);
+  const pts=h.map((s,i)=>[x(i),y(pct(s.ok,s.n)),s,i]);
+  const grid=[0,50,100].map(v=>`<line class="grid" x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}"/><text class="eixo" x="${L-6}" y="${y(v)+4}" text-anchor="end">${v}%</text>`).join("");
+  const ult=pts[n-1];
+  const marcas=pts.map(([px,py,s,i])=>`<g><circle class="alvo" cx="${px}" cy="${py}" r="12" tabindex="0" data-hver="${s.t}"><title>${dataBR(s.t)}: ${s.ok}/${s.n} (${pct(s.ok,s.n)}%) · ${recorteTxt(s.recorte)}</title></circle><circle class="ponto" cx="${px}" cy="${py}" r="5"/></g>`).join("");
+  return `<div class="grafico"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Acerto por simulado, do mais antigo ao mais recente">${grid}
+    <text class="eixo" x="${L}" y="${H-6}">1º</text><text class="eixo" x="${W-R}" y="${H-6}" text-anchor="end">${n}º simulado</text>
+    <polyline class="linha" points="${pts.map(p=>p[0]+","+p[1]).join(" ")}"/>${marcas}
+    <text class="rot" x="${ult[0]+10}" y="${ult[1]+4}">${pct(ult[2].ok,ult[2].n)}%</text></svg></div>`;
+}
+function renderHistorico(){
+  const el=$("#historico");const h=store.get("simulados",[]);
+  if(histView){
+    const s=h.find(x=>x.t===histView);
+    if(s){const list=s.itens.map(([id])=>QBY[id]).filter(Boolean);const ans=Object.fromEntries(s.itens.map(([id,p])=>[id,p===null?undefined:p]));const faltam=s.itens.length-list.length;
+      el.innerHTML=`<div class="row" style="margin-top:20px"><button class="btn" id="hist-voltar">← Voltar ao histórico</button></div>
+        <h2>Simulado de ${esc(dataBR(s.t))}</h2><p class="small">${esc(recorteTxt(s.recorte))}${s.fonte?" · "+esc(FONTES[s.fonte]||s.fonte):""} · nota na hora: ${s.ok}/${s.n}${faltam?` · ${faltam} questão(ões) não estão mais no banco e foram omitidas`:""}</p>
+        ${resultadoHTML(list,ans,"")}`;
+      $("#hist-voltar").onclick=()=>{histView=null;renderHistorico();window.scrollTo(0,0)};return}
+    histView=null;
+  }
+  if(!h.length){el.innerHTML=`<h2>Histórico de simulados</h2><div class="empty">Você ainda não terminou nenhum simulado. Ao finalizar um, ele aparece aqui com a nota, a evolução e a correção completa.<div class="row" style="justify-content:center;margin-top:12px"><button class="btn primary" data-irsim="1">Fazer um simulado</button></div></div>`;return}
+  const tot=h.reduce((a,s)=>a+s.n,0),acc=h.reduce((a,s)=>a+s.ok,0);
+  const melhor=h.reduce((b,s)=>pct(s.ok,s.n)>pct(b.ok,b.n)?s:b,h[0]),ult=h[h.length-1];
+  const porM={};h.forEach(s=>s.itens.forEach(([id,p])=>{const q=QBY[id];if(!q)return;const m=porM[q.materia]=porM[q.materia]||{ok:0,n:0};m.n++;if(p===q.resposta)m.ok++}));
+  const mats=Object.entries(porM).sort((a,b)=>pct(a[1].ok,a[1].n)-pct(b[1].ok,b[1].n)||b[1].n-a[1].n);
+  el.innerHTML=`<h2>Histórico de simulados</h2><p class="lead">Seus simulados finalizados, salvos só neste navegador.</p>
+    <div class="tiles">
+      <div class="tile"><div class="v">${h.length}</div><div class="l">simulados</div></div>
+      <div class="tile"><div class="v">${pct(acc,tot)}%</div><div class="l">acerto médio</div></div>
+      <div class="tile"><div class="v">${pct(melhor.ok,melhor.n)}%</div><div class="l">melhor</div></div>
+      <div class="tile"><div class="v">${pct(ult.ok,ult.n)}%</div><div class="l">último</div></div>
+    </div>
+    <h3>Evolução</h3>${graficoEvolucao(h)}
+    <h3 style="margin-top:22px">Acerto por matéria</h3><p class="small">Somando todos os simulados, da matéria com menor acerto para a maior.</p>
+    <div class="barras">${mats.map(([mid,m])=>`<div class="barra"><button class="btn" style="text-align:left;border:0;padding:0;background:none;color:var(--fg);font:500 14px var(--f-body)" data-ir="${mid}" data-bloco="">${esc((MBY[mid]||{titulo:mid}).titulo)}</button><div class="trilho" role="img" aria-label="${pct(m.ok,m.n)}%"><i style="width:${pct(m.ok,m.n)}%"></i></div><span class="num">${m.ok}/${m.n} · ${pct(m.ok,m.n)}%</span></div>`).join("")}</div>
+    <h3 style="margin-top:22px">Simulados feitos</h3>
+    <div class="hlist">${h.slice().reverse().map(s=>`<div class="hitem"><div><b>${esc(dataBR(s.t))}</b><div class="small">${s.n} questões · ${esc(recorteTxt(s.recorte))}${s.fonte?" · "+esc(FONTES[s.fonte]||s.fonte):""}</div></div><span class="pct">${s.ok}/${s.n} · ${pct(s.ok,s.n)}%</span><button class="btn" data-hver="${s.t}">Ver correção</button></div>`).join("")}</div>
+    <div class="row" style="margin-top:18px"><button class="btn" id="hist-apagar">Apagar histórico</button></div>`;
+  const ap=$("#hist-apagar");ap.onclick=()=>{if(ap.dataset.c!=="1"){ap.dataset.c="1";ap.textContent=`Apagar os ${h.length} simulados? Clique de novo`;return}store.set("simulados",[]);renderHistorico()};
+}
+document.addEventListener("click",e=>{
+  const v=e.target.closest("[data-hver]");if(v){histView=+v.dataset.hver;show("historico");histView=+v.dataset.hver;renderHistorico();window.scrollTo(0,0);return}
+  if(e.target.closest("[data-irhist]")){show("historico");window.scrollTo(0,0);return}
+  if(e.target.closest("[data-irsim]")){show("simulado");window.scrollTo(0,0)}
+});
+document.addEventListener("keydown",e=>{const v=e.target.closest&&e.target.closest("circle[data-hver]");if(v&&(e.key==="Enter"||e.key===" ")){e.preventDefault();v.dispatchEvent(new MouseEvent("click",{bubbles:true}))}});
 
 // ---- erros
 function renderErros(){

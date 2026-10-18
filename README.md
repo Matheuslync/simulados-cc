@@ -11,6 +11,7 @@ O site tem:
 - **Treinar:** uma questão por vez, com correção e explicação na hora, filtrando por matéria ou fase.
 - **Simulado:** 10 a 40 questões sorteadas, com mais peso para as matérias de prioridade alta; correção só no final.
 - **Erros:** o que você errou, para refazer.
+- **Histórico:** os simulados que você fez, com nota, evolução, acerto por matéria e a correção completa de cada um.
 
 Seu progresso fica salvo no navegador. Não há login nem servidor.
 
