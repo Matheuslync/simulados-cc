@@ -6,8 +6,8 @@ body:
   - type: markdown
     attributes:
       value: |
-        Obrigado por contribuir! Use questões **escritas por você** (ou adaptadas com suas palavras).
-        Não copie questões do FIAP ON (Fast tests, Quizzes, provas): elas têm direitos autorais.
+        Obrigado por contribuir! Envie só questões **escritas por você**.
+        Não copie material de terceiros (livros, sites ou plataformas de ensino).
   - type: dropdown
     id: materia
     attributes:

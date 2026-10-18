@@ -40,7 +40,7 @@ print(arq.read())                    # no arquivo
 arq.close()
 ```
 
-**"O que é, o que é" (caiu no Quiz da Fase 5):** "posiciono o cursor dentro do arquivo, ajudo a exibir parte dele, tenho dois parâmetros mas quase sempre passam só o primeiro" → **`seek`**. As outras alternativas eram `count`, `print`, `read` e `write`.
+**Charada "o que é, o que é":** "posiciono o cursor dentro do arquivo, ajudo a exibir parte dele, tenho dois parâmetros mas quase sempre passam só o primeiro" → **`seek`**. Não confunda com `count`, `print`, `read` ou `write`.
 
 **count:** `texto.count("a")` e `lista.count(x)` contam ocorrências. Contar linhas: `len(arq.readlines())`.
 

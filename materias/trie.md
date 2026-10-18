@@ -29,4 +29,4 @@ Exemplo: inserir *casa* e *casaco*. As duas compartilham o caminho `c → a → 
 
 **Trie × hash:** a trie permite busca por prefixo e ordem alfabética; a hash não. Em compensação a trie **gasta mais memória** (muitos ponteiros por nó).
 
-> **Na prova:** "estrutura ideal para autocompletar / busca por prefixo" → **Trie**. "Fila de prioridade / pegar o maior rápido" → **Heap**.
+> **Para fixar:** "estrutura ideal para autocompletar / busca por prefixo" → **Trie**. "Fila de prioridade / pegar o maior rápido" → **Heap**.

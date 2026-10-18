@@ -4,7 +4,7 @@ grupo: Lógica digital
 prioridade: alta
 ordem: 5
 fiap:
-  - Fase 6 · Cap 2 — Mapa de Karnaugh (conteúdo principal) | https://on.fiap.com.br/mod/conteudoshtml/view.php?id=658035
+  - Fase 6 · Cap 2 — Mapa de Karnaugh (principal) | https://on.fiap.com.br/mod/conteudoshtml/view.php?id=658035
   - Fase 3 · Cap 2 — Álgebra de Boole, mintermos e maxtermos | https://on.fiap.com.br/mod/conteudoshtml/view.php?id=609776
   - Fase 5 · Cap 2 — Teoremas booleanos | https://on.fiap.com.br/mod/conteudoshtml/view.php?id=629591
 links:

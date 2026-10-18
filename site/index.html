@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Prova FIAP CC — Fases 1 a 6</title>
-<meta name="description" content="Resumos, links e banco de questões colaborativo para a prova de Ciência da Computação da FIAP (fases 1 a 6).">
+<title>Simulados CC — Fases 1 a 6</title>
+<meta name="description" content="Resumos, simulados e banco de questões colaborativo para estudar Ciência da Computação (fases 1 a 6).">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
@@ -108,7 +108,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:16px}
 <body>
 <header class="top"><div class="wrap">
   <div class="bar">
-    <h1>Prova FIAP CC<small>Ciência da Computação · Fases 1 a 6</small></h1>
+    <h1>Simulados CC<small>Ciência da Computação · Fases 1 a 6</small></h1>
     <div class="stats" id="stats"></div>
   </div>
   <nav role="tablist" id="tabs">
@@ -135,14 +135,14 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:16px}
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 if(!window.DADOS){document.querySelector("main").innerHTML='<div class="empty">Não encontrei <code>site/dados.js</code>. Rode <code>python3 scripts/build.py</code> na raiz do repositório e recarregue a página.</div>';return}
-const store={get(k,d){try{const v=localStorage.getItem("provafiap:"+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem("provafiap:"+k,JSON.stringify(v))}catch(e){}}};
+const store={get(k,d){try{const v=localStorage.getItem("simuladoscc:"+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem("simuladoscc:"+k,JSON.stringify(v))}catch(e){}}};
 const md=s=>window.marked?marked.parse(s):"<pre>"+esc(s)+"</pre>";
 const {materias:MAT,questoes:Q,repo:REPO}=window.DADOS;
 const MBY=Object.fromEntries(MAT.map(m=>[m.id,m]));
 const QBY=Object.fromEntries(Q.map(q=>[q.id,q]));
 const PRIO={3:"alta",2:"média",1:"baixa"};
-const temOficiais=Q.some(q=>q.fonte==="oficial");
-const FONTES={comunidade:"Comunidade",oficial:"Oficial FIAP (local)"};
+const temPessoais=Q.some(q=>q.fonte==="pessoal");
+const FONTES={comunidade:"Comunidade",pessoal:"Pessoal (local)"};
 const repoLink=(p,txt)=>REPO?`<a href="${esc(REPO)}${p}" target="_blank" rel="noopener">${txt}</a>`:txt;
 
 let hist=store.get("hist",{});
@@ -166,13 +166,13 @@ function renderRoteiro(){
   const done=store.get("done",{});
   const order=MAT.slice().sort((a,b)=>b.prioridade-a.prioridade||a.ordem-b.ordem);
   $("#roteiro").innerHTML=`
-  <h2>O que cai, pelo relato de quem já fez</h2>
+  <h2>Foco de estudo</h2>
   <div class="intel">
-    <p><b>Estrutura de dados (2 questões):</b> heap e trie. Também citados: tabela hash e árvore/busca binária.</p>
-    <p><b>Mapa de Karnaugh (2 questões).</b></p>
-    <p><b>Python (2–3, bem teóricas):</b> ler um código simples; arquivo com <code>write</code>, <code>seek</code> e <code>count</code>, incluindo uma pergunta no estilo “o que é, o que é”.</p>
+    <p><b>Estrutura de dados:</b> heap, trie, tabela hash, árvores e busca binária.</p>
+    <p><b>Lógica digital:</b> mapa de Karnaugh e álgebra de Boole.</p>
+    <p><b>Python:</b> leitura de código simples; arquivos com <code>write</code>, <code>seek</code> e <code>count</code>.</p>
     <p><b>Matemática:</b> derivada e gradiente descendente (achar o mínimo).</p>
-    <p><b>Resto:</b> energia, sustentabilidade e IA. Quem já fez disse que dá para responder lendo com atenção.</p>
+    <p><b>Energia, sustentabilidade e IA:</b> conceitos principais e leitura atenta dos enunciados.</p>
   </div>
   <p class="lead">Estude primeiro as matérias de prioridade <span class="pill p3">alta</span>: leia o resumo, treine as questões da matéria e feche com um simulado. Marque cada matéria quando se sentir seguro.</p>
   <div class="plan">${order.map(m=>`
@@ -208,8 +208,8 @@ function renderMaterias(){
 // ---- questão
 function qHTML(q,idx,total){
   const m=MBY[q.materia];
-  const meta=[`<span class="pill">${q.fonte==="oficial"?esc(q.origem||"Oficial"):"Comunidade"}</span>`];
-  if(q.fase&&q.fonte!=="oficial")meta.push("Fase "+q.fase);
+  const meta=[`<span class="pill">${q.fonte==="pessoal"?esc(q.origem||"Pessoal"):"Comunidade"}</span>`];
+  if(q.fase&&q.fonte!=="pessoal")meta.push("Fase "+q.fase);
   if(m)meta.push(esc(m.titulo));
   if(q.autor)meta.push("por "+esc(q.autor));
   if(total)meta.push(`<span style="margin-left:auto">${idx+1}/${total}</span>`);
@@ -227,7 +227,7 @@ function startTrain(){trainState.list=shuffle(filterQ(trainState));trainState.i=
 function filtersHTML(s){
   const fases=[...new Set(Q.map(q=>q.fase).filter(Boolean))].sort();
   return `<div class="row">
-    ${temOficiais?`<select id="tr-fonte" aria-label="Origem"><option value="">Todas as origens</option>${Object.entries(FONTES).map(([k,v])=>`<option value="${k}" ${s.fonte===k?"selected":""}>${v}</option>`).join("")}</select>`:""}
+    ${temPessoais?`<select id="tr-fonte" aria-label="Origem"><option value="">Todas as origens</option>${Object.entries(FONTES).map(([k,v])=>`<option value="${k}" ${s.fonte===k?"selected":""}>${v}</option>`).join("")}</select>`:""}
     ${fases.length?`<select id="tr-fase" aria-label="Fase"><option value="">Todas as fases</option>${fases.map(f=>`<option value="${f}" ${String(s.fase)===String(f)?"selected":""}>Fase ${f}</option>`).join("")}</select>`:""}
     <select id="tr-materia" aria-label="Matéria"><option value="">Todas as matérias</option>${MAT.map(m=>`<option value="${m.id}" ${s.materia===m.id?"selected":""}>${esc(m.titulo)} (${cnt(m.id)})</option>`).join("")}</select>
   </div>`;
@@ -260,7 +260,7 @@ function renderSim(){
   if(!sim.on){
     el.innerHTML=`<h2>Simulado</h2><p class="lead">Questões sorteadas com mais peso para as matérias de prioridade alta. A correção só aparece no final.</p>
     <div class="row"><select id="sim-n" aria-label="Quantidade">${[10,20,30,40].map(n=>`<option ${n===sim.n?"selected":""} value="${n}">${n} questões</option>`).join("")}</select>
-    ${temOficiais?`<select id="sim-fonte" aria-label="Origem"><option value="">Todas as origens</option>${Object.entries(FONTES).map(([k,v])=>`<option value="${k}" ${sim.fonte===k?"selected":""}>${v}</option>`).join("")}</select>`:""}
+    ${temPessoais?`<select id="sim-fonte" aria-label="Origem"><option value="">Todas as origens</option>${Object.entries(FONTES).map(([k,v])=>`<option value="${k}" ${sim.fonte===k?"selected":""}>${v}</option>`).join("")}</select>`:""}
     <button class="btn primary" id="sim-go">Começar simulado</button></div>`;
     $("#sim-n").onchange=e=>sim.n=+e.target.value;const f=$("#sim-fonte");if(f)f.onchange=e=>sim.fonte=e.target.value;
     $("#sim-go").onclick=()=>{sim.list=buildSim();sim.ans={};sim.i=0;sim.done=false;sim.on=true;renderSim()};return;

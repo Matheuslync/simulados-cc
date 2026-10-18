@@ -12,7 +12,7 @@ links:
   - PROCEL — Programa Nacional de Conservação de Energia Elétrica | https://www.gov.br/mme/pt-br/assuntos/secretarias/sntep/procel
 ---
 
-> Segundo quem já fez a prova, as questões de energia são de **interpretação de texto**: leia o enunciado com calma e elimine as alternativas absolutas ("unicamente", "integralmente", "sempre").
+> Questões deste tema costumam ser de **interpretação de texto**: leia o enunciado com calma e elimine as alternativas absolutas ("unicamente", "integralmente", "sempre").
 
 **Leis da termodinâmica:** 1ª — a energia se conserva (só se transforma). 2ª — toda conversão tem perdas (entropia); nenhuma máquina tem 100% de eficiência.
 

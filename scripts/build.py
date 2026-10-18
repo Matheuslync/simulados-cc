@@ -180,7 +180,7 @@ def carregar_questoes(ids_materias):
 
 
 def carregar_privadas(ids_materias):
-    """Questões oficiais da FIAP guardadas só na sua máquina (pasta privado/, ignorada pelo git)."""
+    """Questões pessoais guardadas só na sua máquina (pasta privado/, ignorada pelo git)."""
     questoes = []
     for arquivo in sorted(PRIVADO.glob("*.json")):
         try:
@@ -190,7 +190,7 @@ def carregar_privadas(ids_materias):
             continue
         for i, q in enumerate(lista):
             q.setdefault("id", f"privado/{arquivo.stem}/{i}")
-            v = validar_questao(arquivo, q, ids_materias, "oficial")
+            v = validar_questao(arquivo, q, ids_materias, "pessoal")
             if v:
                 questoes.append(v)
     return questoes
@@ -282,7 +282,7 @@ def main():
     }
     js = "window.DADOS = " + json.dumps(dados, ensure_ascii=False).replace("</", "<\\/") + ";\n"
     SAIDA.write_text(js, encoding="utf-8")
-    extra = f" + {len(privadas)} oficiais locais (privado/)" if privadas else ""
+    extra = f" + {len(privadas)} pessoais locais (privado/)" if privadas else ""
     print(f"✓ gerado {SAIDA.relative_to(RAIZ)}{extra}")
 
 

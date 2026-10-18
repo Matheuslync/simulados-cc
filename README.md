@@ -1,12 +1,12 @@
-# Prova FIAP CC — Fases 1 a 6
+# Simulados CC — Fases 1 a 6
 
-Resumos, links e um banco de questões **colaborativo** para estudar para a prova de Ciência da Computação da FIAP (1º ano), com foco nas fases 1 a 4 e no que também pode cair das fases 5 e 6.
+Resumos, links e um banco de questões **colaborativo** para estudar e fazer simulados de Ciência da Computação da FIAP (1º ano), fases 1 a 6.
 
-**Site:** https://matheuslync.github.io/prova-fiap-cc/
+**Site:** https://matheuslync.github.io/simulados-cc/
 
 O site tem:
 
-- **Roteiro:** o que cai na prova segundo quem já fez, com as matérias em ordem de prioridade e um checklist.
+- **Roteiro:** as matérias em ordem de prioridade de estudo, com um checklist.
 - **Matérias:** resumo de cada matéria, os capítulos do FIAP ON onde ela aparece e links para se aprofundar.
 - **Treinar:** uma questão por vez, com correção e explicação na hora, filtrando por matéria ou fase.
 - **Simulado:** 10 a 40 questões sorteadas, com mais peso para as matérias de prioridade alta; correção só no final.
@@ -14,19 +14,17 @@ O site tem:
 
 Seu progresso fica salvo no navegador. Não há login nem servidor.
 
-## O que cai na prova
+## Foco de estudo
 
-Relato de quem já fez a prova (out/2026):
+| Assunto | Matérias |
+|---|---|
+| Estrutura de dados | heap, trie, tabela hash, árvores e busca binária |
+| Lógica digital | mapa de Karnaugh, álgebra de Boole |
+| Python | leitura de código; arquivos com `write`, `seek` e `count` |
+| Matemática | derivada e gradiente descendente |
+| Energia, sustentabilidade e IA | leitura atenta e conceitos principais |
 
-| Assunto | Quantas | Observação |
-|---|---|---|
-| Estrutura de dados | 2 | **heap** e **trie**; também citados tabela hash e árvore/busca binária |
-| Mapa de Karnaugh | 2 | simplificação com 2 a 4 variáveis |
-| Python | 2–3 | bem teóricas: ler um código simples; `write`, `seek` e `count` em arquivos, incluindo uma pergunta no estilo "o que é, o que é" |
-| Matemática | 1+ | derivada e gradiente descendente (achar o mínimo) |
-| Energia, sustentabilidade e IA | o resto | dá para responder lendo o enunciado com atenção |
-
-Você fez a prova e caiu algo diferente? Abra uma issue ou edite esta tabela.
+Acha que falta um assunto ou que uma prioridade está errada? Abra uma issue ou edite os arquivos em `materias/`.
 
 ## Matérias
 
@@ -59,31 +57,11 @@ Tabela gerada automaticamente a partir de [`materias/`](materias/) pelo `scripts
 Precisa só do Python 3.9 ou mais novo, sem instalar nada.
 
 ```bash
-git clone https://github.com/Matheuslync/prova-fiap-cc.git
-cd prova-fiap-cc
+git clone https://github.com/Matheuslync/simulados-cc.git
+cd simulados-cc
 python3 scripts/build.py      # valida tudo e gera site/dados.js
 open site/index.html          # macOS; no Linux: xdg-open, no Windows: start
 ```
-
-### Treinando também com as questões oficiais (só na sua máquina)
-
-Os Fast tests e os Quizzes do FIAP ON têm direitos autorais e **não podem** ir para este repositório. Mas você pode usá-los localmente: coloque um arquivo `.json` na pasta `privado/` (ignorada pelo git) com uma lista de questões no mesmo formato das questões do repositório, mais o campo `materia`:
-
-```json
-[
-  {
-    "materia": "python-arquivos",
-    "pergunta": "…",
-    "alternativas": ["…", "…"],
-    "resposta": "D",
-    "explicacao": "…",
-    "fase": 5,
-    "origem": "Quiz da Fase 5"
-  }
-]
-```
-
-Ao rodar `python3 scripts/build.py`, elas entram no seu site local com a etiqueta da origem e um filtro "Oficial FIAP (local)". O `site/dados.js` gerado também é ignorado pelo git, então nada disso é publicado.
 
 ## Contribuindo
 
@@ -98,7 +76,6 @@ materias/          um resumo por matéria (Markdown com cabeçalho de metadados)
 questoes/<materia>/ uma questão por arquivo .json
 scripts/build.py   valida tudo e gera site/dados.js (e a tabela de matérias deste README)
 site/index.html    o site (HTML + JS puro)
-privado/           suas questões oficiais locais (ignorado pelo git)
 .github/           validação de pull requests, publicação no GitHub Pages e formulário de questão
 ```
 
@@ -108,9 +85,9 @@ O workflow `.github/workflows/pages.yml` gera e publica o site a cada push na `m
 
 ## Aviso
 
-Material feito por alunos para alunos. **Não é um material oficial da FIAP** e pode conter erros; na dúvida, confira no capítulo correspondente do FIAP ON. Os resumos e questões deste repositório são de autoria dos contribuidores.
+Material feito por alunos para alunos, para estudo. **Não é um material oficial da FIAP** e pode conter erros; na dúvida, confira no capítulo correspondente do FIAP ON. Os resumos e questões deste repositório são de autoria dos contribuidores.
 
 ## Licença
 
 - Código (`scripts/`, `site/`, `.github/`): [MIT](LICENSE).
-- Conteúdo (`materias/`, `questoes/`): [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.pt_BR) — pode copiar e adaptar citando a fonte e mantendo a mesma licença.
+- Resumos e questões (`materias/`, `questoes/`): [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.pt_BR) — pode copiar e adaptar citando a fonte e mantendo a mesma licença.

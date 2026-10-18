@@ -1,6 +1,6 @@
 # Guia de contribuição
 
-Obrigado por ajudar! Este repositório é feito por alunos para alunos de Ciência da Computação da FIAP. O foco é a **prova das fases 1 a 6**, principalmente as matérias que mais caem: heap, trie, tabela hash, árvores binárias, mapa de Karnaugh, Python (arquivos e leitura de código) e gradiente descendente.
+Obrigado por ajudar! Este repositório é feito por alunos para alunos de Ciência da Computação da FIAP, para estudar e fazer simulados das fases 1 a 6. As matérias de prioridade alta são heap, trie, tabela hash, árvores binárias, mapa de Karnaugh, Python (arquivos e leitura de código) e gradiente descendente.
 
 Você pode contribuir de três jeitos, do mais fácil ao mais completo:
 
@@ -10,18 +10,16 @@ Você pode contribuir de três jeitos, do mais fácil ao mais completo:
 
 Pelo GitHub dá para fazer 2 e 3 direto no navegador: abra a pasta, clique em **Add file → Create new file** (ou no lápis para editar) e o GitHub cria o fork e o pull request para você.
 
-## Regra mais importante: direitos autorais
+## Regra mais importante: autoria
 
-**Não envie conteúdo copiado do FIAP ON**: texto dos capítulos, Fast tests, Quizzes, atividades ou provas. Esse material pertence à FIAP e não pode ser redistribuído em um repositório público.
+Envie só questões e resumos **escritos por você**. Não copie material de terceiros (livros, sites ou plataformas de ensino).
 
 Pode (e deve):
 
-- escrever questões com suas palavras sobre os mesmos assuntos;
+- escrever questões com suas palavras;
 - criar variações (outros números, outros códigos, outras situações);
 - resumir conceitos com suas palavras;
-- colocar **links** para os capítulos do FIAP ON (quem tem login abre).
-
-Se quiser treinar com as questões oficiais, guarde-as na pasta `privado/` da sua máquina (ela é ignorada pelo git). Veja o README.
+- colocar **links** para materiais de referência.
 
 ## Adicionando uma questão
 
@@ -53,7 +51,7 @@ Dicas para uma boa questão:
 
 - **Uma ideia por questão.** Se a pergunta testa duas coisas, divida em duas.
 - **Alternativas plausíveis.** Os erros devem ser os erros que um aluno comete de verdade (ex.: esquecer que o `\n` conta no `write`).
-- **Questões com código:** rode o código antes e confira a saída. É o tipo de questão que mais aparece na prova.
+- **Questões com código:** rode o código antes e confira a saída. São ótimas para treinar leitura de código.
 - **Explique o porquê**, não só "a correta é B".
 
 O arquivo `questoes/_modelo.json.txt` tem um modelo para copiar.
@@ -97,14 +95,14 @@ Resumo em Markdown: listas, **negrito**, `código`, tabelas e blocos de código.
 |---|---|
 | `titulo` | Nome exibido no site. Se tiver `:`, coloque entre aspas. |
 | `grupo` | Agrupa as matérias na aba Matérias (ex.: `Estrutura de dados`, `Python`). |
-| `prioridade` | `alta`, `media` ou `baixa`. Define a ordem do roteiro e o peso no simulado. Use `alta` só para o que comprovadamente cai na prova. |
+| `prioridade` | `alta`, `media` ou `baixa`. Define a ordem do roteiro e o peso no simulado. Use `alta` para os temas centrais de estudo. |
 | `ordem` | Número para ordenar as matérias. |
 | `fiap` | Capítulos do FIAP ON onde o assunto aparece, no formato `Texto | URL`. |
 | `links` | Materiais externos gratuitos (documentação, visualizações, vídeos), no formato `Texto | URL`. |
 
 O nome do arquivo vira o identificador da matéria: minúsculas, sem acento, com hífen (`tabela-hash.md`). Ao criar uma matéria nova, crie também a pasta `questoes/<mesmo-nome>/` e adicione a matéria à lista do formulário em `.github/ISSUE_TEMPLATE/nova-questao.yml`.
 
-Resumos bons para este projeto são **curtos e focados na prova**: definição, tabela de complexidade, um exemplo resolvido e as pegadinhas que costumam cair.
+Resumos bons para este projeto são **curtos e focados em revisão**: definição, tabela de complexidade, um exemplo resolvido e as pegadinhas que costumam cair.
 
 ## Testando antes de enviar
 
