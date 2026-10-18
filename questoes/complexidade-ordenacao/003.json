@@ -1,0 +1,12 @@
+{
+  "pergunta": "A notação Θ(g(n)) indica:",
+  "alternativas": [
+    "Apenas um limite superior",
+    "Apenas um limite inferior",
+    "Um limite justo: superior e inferior ao mesmo tempo",
+    "O melhor caso"
+  ],
+  "resposta": "C",
+  "explicacao": "O = limite superior, Ω = inferior, Θ = os dois.",
+  "autor": "Matheuslync"
+}

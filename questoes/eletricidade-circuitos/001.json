@@ -1,0 +1,12 @@
+{
+  "pergunta": "Um resistor de 10 Ω é ligado a uma fonte de 20 V. Qual a corrente?",
+  "alternativas": [
+    "0,5 A",
+    "2 A",
+    "30 A",
+    "200 A"
+  ],
+  "resposta": "B",
+  "explicacao": "Lei de Ohm: I = V / R = 20 / 10 = 2 A.",
+  "autor": "Matheuslync"
+}

@@ -1,6 +1,6 @@
 ---
 titulo: "Python: arquivos (open, write, seek)"
-grupo: Python
+grupo: Programação
 prioridade: alta
 ordem: 6
 fiap:

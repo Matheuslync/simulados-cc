@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual é um cuidado importante ao usar LLMs em agentes de automação?",
+  "alternativas": [
+    "Dar acesso total a todos os sistemas",
+    "Validar as respostas, pois o modelo pode alucinar",
+    "Nunca guardar credenciais",
+    "Desligar o tratamento de erros"
+  ],
+  "resposta": "B",
+  "explicacao": "LLMs podem gerar respostas erradas; valide a saída, limite permissões e controle custos de tokens.",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual derivada numérica tem erro de ordem O(h²)?",
+  "alternativas": [
+    "Progressiva (f(x+h) − f(x))/h",
+    "Regressiva (f(x) − f(x−h))/h",
+    "Central (f(x+h) − f(x−h))/2h",
+    "Nenhuma"
+  ],
+  "resposta": "C",
+  "explicacao": "As diferenças progressiva e regressiva têm erro O(h); a central tem O(h²).",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,12 @@
+{
+  "pergunta": "Em Python, o que imprime print(0.1 + 0.2 == 0.3)?",
+  "alternativas": [
+    "True",
+    "False",
+    "Erro",
+    "0.3"
+  ],
+  "resposta": "B",
+  "explicacao": "0.1 e 0.2 não têm representação exata em binário (IEEE 754); a soma dá 0.30000000000000004. Use math.isclose.",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,12 @@
+{
+  "pergunta": "Pelo teorema mestre, qual a complexidade de T(n) = 2T(n/2) + n?",
+  "alternativas": [
+    "Θ(n)",
+    "Θ(n log n)",
+    "Θ(n²)",
+    "Θ(log n)"
+  ],
+  "resposta": "B",
+  "explicacao": "n^(log₂2) = n, igual a f(n) → caso 2 → Θ(n log n). É a recorrência do merge sort.",
+  "autor": "Matheuslync"
+}

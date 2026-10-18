@@ -1,0 +1,12 @@
+{
+  "pergunta": "A EDO y' = −k·y (k > 0) modela:",
+  "alternativas": [
+    "Crescimento sem limite",
+    "Decaimento exponencial, como o radioativo",
+    "Oscilação de um pêndulo",
+    "Um valor constante"
+  ],
+  "resposta": "B",
+  "explicacao": "Solução y = y₀·e^(−kt): decai exponencialmente. Meia-vida = ln 2 / k.",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,12 @@
+{
+  "pergunta": "O que significa a sigla RAM?",
+  "alternativas": [
+    "Read-only Access Memory",
+    "Random Access Memory: o tempo de acesso é o mesmo para qualquer endereço",
+    "Rapid Array Memory",
+    "Remote Access Module"
+  ],
+  "resposta": "B",
+  "explicacao": "Random Access Memory. 'Memória RAM' é o apelido popular da memória principal.",
+  "autor": "Matheuslync"
+}

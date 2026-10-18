@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual a diferença entre grid search e random search?",
+  "alternativas": [
+    "Grid testa todas as combinações da grade; random sorteia combinações",
+    "Random testa todas; grid sorteia",
+    "Os dois treinam sem validação",
+    "Grid só serve para redes neurais"
+  ],
+  "resposta": "A",
+  "explicacao": "Random search costuma ser mais eficiente quando há muitos hiperparâmetros.",
+  "autor": "Matheuslync"
+}

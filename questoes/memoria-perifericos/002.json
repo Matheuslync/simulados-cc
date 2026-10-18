@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual ordem vai da memória MAIS rápida para a MAIS lenta?",
+  "alternativas": [
+    "Memória principal → cache → registradores → SSD",
+    "Registradores → cache → memória principal → SSD",
+    "Cache → registradores → SSD → memória principal",
+    "SSD → memória principal → cache → registradores"
+  ],
+  "resposta": "B",
+  "explicacao": "Na pirâmide de memória, quanto mais perto da CPU, mais rápida, menor e mais cara: registradores, cache, memória principal, armazenamento.",
+  "autor": "Matheuslync"
+}

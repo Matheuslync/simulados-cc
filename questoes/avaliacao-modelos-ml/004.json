@@ -1,0 +1,12 @@
+{
+  "pergunta": "O StandardScaler do scikit-learn transforma os dados para:",
+  "alternativas": [
+    "Intervalo de 0 a 1",
+    "Média 0 e desvio padrão 1",
+    "Valores inteiros",
+    "Colunas 0/1 por categoria"
+  ],
+  "resposta": "B",
+  "explicacao": "Padronização: média 0, desvio 1. MinMaxScaler leva para 0–1; OneHotEncoder cria colunas 0/1.",
+  "autor": "Matheuslync"
+}

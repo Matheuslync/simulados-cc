@@ -1,0 +1,12 @@
+{
+  "pergunta": "Dois capacitores de 4 µF são ligados em paralelo. A capacitância equivalente é:",
+  "alternativas": [
+    "2 µF",
+    "4 µF",
+    "8 µF",
+    "16 µF"
+  ],
+  "resposta": "C",
+  "explicacao": "Capacitores em paralelo somam: 4 + 4 = 8 µF (o inverso do que acontece com resistores).",
+  "autor": "Matheuslync"
+}

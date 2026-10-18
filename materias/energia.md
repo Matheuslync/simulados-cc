@@ -7,6 +7,7 @@ fiap:
   - Fase 1 · Cap 7 — Eficiência energética e indicadores | https://on.fiap.com.br/mod/conteudoshtml/view.php?id=586185
   - Fase 3 · Cap 8 — Energia solar e eólica | https://on.fiap.com.br/mod/conteudoshtml/view.php?id=609782
   - Fase 4 · Cap 7 — Armazenamento e distribuição de energia | https://on.fiap.com.br/mod/conteudoshtml/view.php?id=617913
+  - Fase 5 · Cap 10 — Resiliência energética | https://on.fiap.com.br/mod/conteudoshtml/view.php?id=629599
   - Fase 6 · Cap 12 — Gerenciamento inteligente de energia | https://on.fiap.com.br/mod/conteudoshtml/view.php?id=658045
 links:
   - PROCEL — Programa Nacional de Conservação de Energia Elétrica | https://www.gov.br/mme/pt-br/assuntos/secretarias/sntep/procel
@@ -35,3 +36,10 @@ Solar e eólica são **intermitentes** → previsão com machine learning, super
 **Armazenamento:** baterias (íons de lítio, ~90–95% de eficiência), mecânico (hidrelétrica **reversível/bombeada**, ar comprimido, volantes de inércia), térmico (sais fundidos) e químico (**hidrogênio verde**, produzido por eletrólise com energia renovável).
 
 **Redes inteligentes (smart grids):** sensores, automação e análise de dados que equilibram **oferta e demanda em tempo real**. Medidores inteligentes (**AMI**) medem o consumo em tempo real e comunicam nos dois sentidos. **ADMS** = sistema avançado de gestão da distribuição.
+
+**Resiliência energética (Fase 5):** capacidade do sistema elétrico de **resistir, se adaptar e se recuperar** de perturbações (eventos climáticos extremos, falhas em cascata, ataques cibernéticos, dependência de poucas fontes). Cinco princípios: **robustez** (aguentar esforços e sobrecargas), **flexibilidade** (se adaptar a mudanças), **capacidade** (de resposta rápida a falhas), **recuperação** (restabelecer o fornecimento com agilidade) e **aprendizado e adaptação** (reduzir vulnerabilidades futuras).
+
+- Estratégias **preventivas:** redundância, manutenção preditiva, geração distribuída, **microrredes** e armazenamento.
+- Estratégias **operacionais:** monitoramento em tempo real, resposta da demanda, ilhamento de partes da rede.
+- Estratégias de **recuperação pós-evento:** planos de contingência e restabelecimento gradual.
+

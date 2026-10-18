@@ -1,0 +1,12 @@
+{
+  "pergunta": "Dois resistores de 6 Ω e 3 Ω estão em PARALELO. Qual a resistência equivalente?",
+  "alternativas": [
+    "9 Ω",
+    "4,5 Ω",
+    "2 Ω",
+    "18 Ω"
+  ],
+  "resposta": "C",
+  "explicacao": "Paralelo de dois: R1·R2/(R1+R2) = 18/9 = 2 Ω. Em série seria 9 Ω.",
+  "autor": "Matheuslync"
+}

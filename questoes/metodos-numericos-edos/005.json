@@ -1,0 +1,12 @@
+{
+  "pergunta": "O método de Euler para resolver y' = f(t, y) usa a atualização:",
+  "alternativas": [
+    "yₙ₊₁ = yₙ + h·f(tₙ, yₙ)",
+    "yₙ₊₁ = yₙ − f(yₙ)/f'(yₙ)",
+    "yₙ₊₁ = h·yₙ",
+    "yₙ₊₁ = f(tₙ)"
+  ],
+  "resposta": "A",
+  "explicacao": "Euler dá um passo h na direção da inclinação atual. A segunda alternativa é o método de Newton.",
+  "autor": "Matheuslync"
+}

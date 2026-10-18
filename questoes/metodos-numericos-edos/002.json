@@ -1,0 +1,12 @@
+{
+  "pergunta": "No método de Newton para achar raízes, a próxima aproximação é:",
+  "alternativas": [
+    "x − f(x)·f'(x)",
+    "x − f(x)/f'(x)",
+    "x + f'(x)/f(x)",
+    "(x + f(x))/2"
+  ],
+  "resposta": "B",
+  "explicacao": "xₖ₊₁ = xₖ − f(xₖ)/f'(xₖ). Falha quando f'(x) ≈ 0.",
+  "autor": "Matheuslync"
+}

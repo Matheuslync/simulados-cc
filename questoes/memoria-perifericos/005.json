@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual impressora usa papel termossensível e é comum em cupons e etiquetas?",
+  "alternativas": [
+    "Matricial",
+    "Jato de tinta",
+    "Laser",
+    "Térmica"
+  ],
+  "resposta": "D",
+  "explicacao": "A impressora térmica escurece o papel termossensível com calor; não usa tinta nem toner.",
+  "autor": "Matheuslync"
+}

@@ -31,6 +31,13 @@ body:
         - grafos
         - portas-logicas-bases
         - historia-hardware
+        - memoria-perifericos
+        - eletricidade-circuitos
+        - metodos-numericos-edos
+        - avaliacao-modelos-ml
+        - etica-diversidade
+        - automacao-agentes
+        - linguagem-c
         - Outra (explique na pergunta)
     validations:
       required: true

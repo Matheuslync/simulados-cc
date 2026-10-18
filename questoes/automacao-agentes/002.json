@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual nó do n8n faz o workflow CHAMAR uma API externa?",
+  "alternativas": [
+    "Webhook",
+    "HTTP Request",
+    "Schedule",
+    "Merge"
+  ],
+  "resposta": "B",
+  "explicacao": "HTTP Request faz a chamada; o Webhook é o contrário: recebe uma chamada externa e inicia o fluxo.",
+  "autor": "Matheuslync"
+}

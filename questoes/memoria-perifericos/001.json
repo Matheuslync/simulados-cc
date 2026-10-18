@@ -1,0 +1,12 @@
+{
+  "pergunta": "Quantos endereços distintos podem ser especificados com 10 bits de endereçamento?",
+  "alternativas": [
+    "10",
+    "100",
+    "1.000",
+    "1.024"
+  ],
+  "resposta": "D",
+  "explicacao": "Com n bits há 2ⁿ endereços: 2¹⁰ = 1.024 (por isso 1 kB = 1.024 bytes).",
+  "autor": "Matheuslync"
+}

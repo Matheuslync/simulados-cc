@@ -1,6 +1,6 @@
 ---
 titulo: "Python: fundamentos e leitura de código"
-grupo: Python
+grupo: Programação
 prioridade: alta
 ordem: 7
 fiap:

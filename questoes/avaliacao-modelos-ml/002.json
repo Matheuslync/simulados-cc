@@ -1,0 +1,12 @@
+{
+  "pergunta": "Ao comparar modelos pelo AIC ou BIC, escolhe-se o modelo com:",
+  "alternativas": [
+    "Maior valor",
+    "Menor valor",
+    "Mais variáveis",
+    "AIC igual ao BIC"
+  ],
+  "resposta": "B",
+  "explicacao": "AIC e BIC penalizam a complexidade; menor valor = melhor equilíbrio entre ajuste e simplicidade.",
+  "autor": "Matheuslync"
+}

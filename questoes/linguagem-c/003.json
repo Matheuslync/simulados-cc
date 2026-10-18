@@ -1,0 +1,12 @@
+{
+  "pergunta": "Por que se usa & em scanf(\"%d\", &x);?",
+  "alternativas": [
+    "Para multiplicar x",
+    "Para passar o endereço de memória da variável",
+    "Para declarar x como constante",
+    "É opcional"
+  ],
+  "resposta": "B",
+  "explicacao": "scanf precisa do endereço da variável para gravar o valor lido nela.",
+  "autor": "Matheuslync"
+}

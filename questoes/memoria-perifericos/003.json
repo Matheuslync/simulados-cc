@@ -1,0 +1,12 @@
+{
+  "pergunta": "Uma memória volátil é aquela que:",
+  "alternativas": [
+    "Só pode ser lida, nunca escrita",
+    "Perde os dados quando deixa de ser alimentada eletricamente",
+    "Usa mídia magnética",
+    "Fica fora do computador"
+  ],
+  "resposta": "B",
+  "explicacao": "Volatilidade é perder o conteúdo sem energia (ex.: cache e memória principal). ROM, flash e HD são não voláteis.",
+  "autor": "Matheuslync"
+}

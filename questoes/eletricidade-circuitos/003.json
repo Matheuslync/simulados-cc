@@ -1,0 +1,12 @@
+{
+  "pergunta": "Em uma associação de resistores em SÉRIE, o que é igual em todos os resistores?",
+  "alternativas": [
+    "A tensão",
+    "A corrente",
+    "A potência",
+    "A resistência"
+  ],
+  "resposta": "B",
+  "explicacao": "Em série a corrente é a mesma; em paralelo, a tensão é a mesma.",
+  "autor": "Matheuslync"
+}

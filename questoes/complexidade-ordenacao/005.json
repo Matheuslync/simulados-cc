@@ -1,0 +1,12 @@
+{
+  "pergunta": "Pelo teorema mestre, qual a complexidade de T(n) = 4T(n/2) + n?",
+  "alternativas": [
+    "Θ(n)",
+    "Θ(n log n)",
+    "Θ(n²)",
+    "Θ(n³)"
+  ],
+  "resposta": "C",
+  "explicacao": "n^(log₂4) = n², que cresce mais rápido que f(n) = n → caso 1 → Θ(n²).",
+  "autor": "Matheuslync"
+}

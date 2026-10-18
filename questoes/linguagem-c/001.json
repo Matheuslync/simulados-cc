@@ -1,0 +1,12 @@
+{
+  "pergunta": "Em C, qual laço executa o bloco PELO MENOS uma vez?",
+  "alternativas": [
+    "for",
+    "while",
+    "do...while",
+    "switch"
+  ],
+  "resposta": "C",
+  "explicacao": "do...while testa a condição no fim, então o bloco roda ao menos uma vez.",
+  "autor": "Matheuslync"
+}

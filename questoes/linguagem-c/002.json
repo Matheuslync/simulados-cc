@@ -1,0 +1,12 @@
+{
+  "pergunta": "O que acontece em um switch em C quando um case não tem break?",
+  "alternativas": [
+    "Erro de compilação",
+    "A execução continua nos cases seguintes",
+    "O programa encerra",
+    "Só o default é executado"
+  ],
+  "resposta": "B",
+  "explicacao": "Sem break, a execução 'cai' (fall-through) para o próximo case.",
+  "autor": "Matheuslync"
+}

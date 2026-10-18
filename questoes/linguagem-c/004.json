@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual formato do printf exibe um número inteiro?",
+  "alternativas": [
+    "%f",
+    "%c",
+    "%d",
+    "%s"
+  ],
+  "resposta": "C",
+  "explicacao": "%d = int; %f = float/double; %c = char; %s = string.",
+  "autor": "Matheuslync"
+}

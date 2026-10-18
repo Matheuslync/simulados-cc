@@ -1,0 +1,12 @@
+{
+  "pergunta": "Um modelo de IA treinado com dados históricos enviesados tende a:",
+  "alternativas": [
+    "Corrigir o viés sozinho",
+    "Reproduzir a discriminação presente nos dados",
+    "Ficar mais preciso para todos os grupos",
+    "Não ser afetado"
+  ],
+  "resposta": "B",
+  "explicacao": "O modelo aprende os padrões dos dados, inclusive os discriminatórios; por isso importam dados representativos e auditoria.",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,12 @@
+{
+  "pergunta": "O append em um vetor dinâmico às vezes realoca tudo, mas é considerado O(1):",
+  "alternativas": [
+    "No pior caso de cada operação",
+    "Amortizado, na média de uma sequência de operações",
+    "Somente em C",
+    "Nunca"
+  ],
+  "resposta": "B",
+  "explicacao": "Análise amortizada: o custo raro e caro se dilui na sequência.",
+  "autor": "Matheuslync"
+}

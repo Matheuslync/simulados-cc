@@ -1,0 +1,12 @@
+{
+  "pergunta": "Um aparelho opera com 220 V e corrente de 5 A. Qual a potência?",
+  "alternativas": [
+    "44 W",
+    "225 W",
+    "1.100 W",
+    "4.400 W"
+  ],
+  "resposta": "C",
+  "explicacao": "P = V · I = 220 × 5 = 1.100 W.",
+  "autor": "Matheuslync"
+}

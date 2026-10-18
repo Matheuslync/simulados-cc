@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual métrica penaliza MAIS os erros grandes?",
+  "alternativas": [
+    "MAE",
+    "MSE",
+    "Acurácia",
+    "Mediana dos erros"
+  ],
+  "resposta": "B",
+  "explicacao": "O MSE eleva os erros ao quadrado, então erros grandes pesam muito mais que no MAE.",
+  "autor": "Matheuslync"
+}

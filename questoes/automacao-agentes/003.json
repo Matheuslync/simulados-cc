@@ -1,0 +1,12 @@
+{
+  "pergunta": "Um workflow que roda todo dia às 8h para coletar dados da web usa um gatilho do tipo:",
+  "alternativas": [
+    "Webhook",
+    "Schedule/cron",
+    "HTTP Request",
+    "AI Agent"
+  ],
+  "resposta": "B",
+  "explicacao": "Gatilhos de agendamento (schedule/cron) disparam em horários definidos.",
+  "autor": "Matheuslync"
+}

@@ -1,0 +1,12 @@
+{
+  "pergunta": "No n8n, qual tipo de nó INICIA um workflow?",
+  "alternativas": [
+    "Action node",
+    "Trigger node",
+    "Output node",
+    "Data node"
+  ],
+  "resposta": "B",
+  "explicacao": "Trigger nodes (gatilhos) iniciam o fluxo: agendamento, webhook, e-mail recebido etc.",
+  "autor": "Matheuslync"
+}

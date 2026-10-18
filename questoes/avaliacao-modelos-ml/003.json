@@ -1,0 +1,12 @@
+{
+  "pergunta": "Qual regularização pode ZERAR coeficientes e, assim, selecionar variáveis?",
+  "alternativas": [
+    "Ridge (L2)",
+    "Lasso (L1)",
+    "Padronização",
+    "Grid search"
+  ],
+  "resposta": "B",
+  "explicacao": "Lasso (L1) leva coeficientes a zero; Ridge (L2) apenas encolhe.",
+  "autor": "Matheuslync"
+}
