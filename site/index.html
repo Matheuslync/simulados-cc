@@ -101,6 +101,18 @@ details.topic[open]>summary h3::after{content:" −"}
 .revitem.bad{border-left:4px solid var(--bad)} .revitem.ok{border-left:4px solid var(--ok)}
 .small{font-size:13px;color:var(--muted)}
 footer{border-top:1px solid var(--line);margin-top:40px;padding-top:16px}
+.filtros{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:4px}
+.filtros>summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.filtros>summary::-webkit-details-marker{display:none}
+.filtros>summary .small{font-weight:400}
+.fgrupo{margin-top:12px}
+.fgrupo h5{font:600 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 6px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.fgrupo h5 button{font:500 12px var(--f-body);text-transform:none;letter-spacing:0;background:none;border:0;color:var(--accent);cursor:pointer;padding:0;text-decoration:underline}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:500 13px var(--f-body);border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:99px;padding:4px 10px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.chip:disabled{opacity:.4;cursor:default}
+.chip .c{font:12px var(--f-mono);opacity:.75;margin-left:4px}
 .guia{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px;font-size:14px}
 .guia h5{font:600 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
 .trecho{background:var(--accent-soft);border-radius:6px;padding:8px 12px;margin:0 0 8px;max-width:72ch}
@@ -207,9 +219,11 @@ function show(t){tabs.forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===
 tabs.forEach(b=>b.onclick=()=>{show(b.dataset.tab);window.scrollTo(0,0)});
 const cnt=id=>Q.filter(q=>q.materia===id).length;
 const RECORTES={"":"Todas as fases","1-4":"Fases 1 a 4","5-6":"Fases 5 e 6","1":"Fase 1","2":"Fase 2","3":"Fase 3","4":"Fase 4","5":"Fase 5","6":"Fase 6"};
-const noRecorte=(fases,r)=>{if(!r)return true;const [a,b]=r.includes("-")?r.split("-").map(Number):[+r,+r];return (fases||[]).some(f=>f>=a&&f<=b)};
+const fasesDoRecorte=r=>{if(!r)return null;if(r.includes("-")){const[a,b]=r.split("-").map(Number);return [1,2,3,4,5,6,7].filter(f=>f>=a&&f<=b)}return r.split(",").map(Number)};
+const noRecorte=(fases,r)=>{const fs=fasesDoRecorte(r);return !fs||(fases||[]).some(f=>fs.includes(f))};
+const recorteDe=fs=>{fs=[...new Set(fs)].sort();const k=fs.join(",");return !fs.length||k==="1,2,3,4,5,6"?"":k==="1,2,3,4"?"1-4":k==="5,6"?"5-6":k};
 const chips=fases=>(fases||[]).map(f=>`<span class="fz ${f>=5?"tarde":""}" title="Fase ${f}">F${f}</span>`).join("");
-function recorteSelect(id,val){return `<select id="${id}" aria-label="Fases">${Object.entries(RECORTES).map(([k,v])=>`<option value="${k}" ${val===k?"selected":""}>${v}</option>`).join("")}</select>`}
+function recorteSelect(id,val){const ops=Object.assign({},RECORTES);if(val&&!ops[val])ops[val]="Fases "+val.replace(/,/g,", ");return `<select id="${id}" aria-label="Fases">${Object.entries(ops).map(([k,v])=>`<option value="${k}" ${val===k?"selected":""}>${v}</option>`).join("")}</select>`}
 function abrirMateria(id,bloco){show("materias");const el=document.getElementById("m-"+id);if(!el)return;el.open=true;
   const alvo=bloco!=null&&BLOCOS[id]?BLOCOS[id][bloco]:null;
   if(alvo){alvo.scrollIntoView({block:"center"});alvo.classList.add("destaque");setTimeout(()=>alvo.classList.remove("destaque"),2500)}else el.scrollIntoView()}
@@ -254,7 +268,7 @@ function revisarHTML(erradas){
 document.addEventListener("click",e=>{const b=e.target.closest("[data-ir],[data-trm]");if(!b)return;
   if(b.dataset.trm){treinarMateria(b.dataset.trm);return}
   abrirMateria(b.dataset.ir,b.dataset.bloco===""?null:+b.dataset.bloco)});
-function treinarMateria(id){Object.assign(trainState,{materia:id,fonte:"",recorte:""});startTrain();show("treino");window.scrollTo(0,0)}
+function treinarMateria(id){Object.assign(trainState,{materias:[id],fonte:"",recorte:""});startTrain();show("treino");window.scrollTo(0,0)}
 
 // ---- roteiro
 function renderRoteiro(){
@@ -348,16 +362,24 @@ function qHTML(q,idx,total){
 const explHTML=(q,pick)=>`<div class="exp"><b class="${pick===q.resposta?"ok":"bad"}">${pick===q.resposta?"Correto.":"Incorreto."}</b> Resposta: <b>${"ABCDEF"[q.resposta]}</b>. ${esc(q.explicacao)}</div>`;
 
 // ---- treino
-const trainState={fonte:"",recorte:store.get("recorte",""),materia:"",list:[],i:0,answered:{}};
+const trainState={fonte:"",recorte:store.get("recorte",""),materias:store.get("materias",[]).filter(id=>MBY[id]),list:[],i:0,answered:{}};
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
-const filterQ=s=>Q.filter(q=>(!s.fonte||q.fonte===s.fonte)&&noRecorte(q.fases,s.recorte)&&(!s.materia||q.materia===s.materia));
+const filterQ=s=>Q.filter(q=>(!s.fonte||q.fonte===s.fonte)&&noRecorte(q.fases,s.recorte)&&(!s.materias.length||s.materias.includes(q.materia)));
 function startTrain(){trainState.list=shuffle(filterQ(trainState));trainState.i=0;trainState.answered={};renderTreino()}
 function filtersHTML(s){
-  return `<div class="row">
-    ${temPessoais?`<select id="tr-fonte" aria-label="Origem"><option value="">Todas as origens</option>${Object.entries(FONTES).map(([k,v])=>`<option value="${k}" ${s.fonte===k?"selected":""}>${v}</option>`).join("")}</select>`:""}
-    ${recorteSelect("tr-recorte",s.recorte)}
-    <select id="tr-materia" aria-label="Matéria"><option value="">Todas as matérias</option>${MAT.filter(m=>noRecorte(m.fases,s.recorte)).map(m=>`<option value="${m.id}" ${s.materia===m.id?"selected":""}>${esc(m.titulo)} (${cnt(m.id)})</option>`).join("")}</select>
-  </div>`;
+  const fsel=fasesDoRecorte(s.recorte)||[];
+  const sel=new Set(s.materias);
+  const n=filterQ(s).length;
+  const resumo=`${s.materias.length?s.materias.length+(s.materias.length>1?" matérias":" matéria"):"Todas as matérias"} · ${s.recorte?(RECORTES[s.recorte]||"Fases "+s.recorte.replace(/,/g,", ")):"todas as fases"}`;
+  return `<details class="filtros" id="tr-filtros" ${store.get("filtrosAbertos",true)?"open":""}>
+    <summary><span>Filtros</span><span class="small">${esc(resumo)} · <b>${n}</b> questões</span></summary>
+    ${temPessoais?`<div class="fgrupo"><h5>Origem</h5><select id="tr-fonte" aria-label="Origem"><option value="">Todas as origens</option>${Object.entries(FONTES).map(([k,v])=>`<option value="${k}" ${s.fonte===k?"selected":""}>${v}</option>`).join("")}</select></div>`:""}
+    <div class="fgrupo"><h5>Fases <button data-fpre="">Todas</button><button data-fpre="1-4">1 a 4</button><button data-fpre="5-6">5 e 6</button></h5>
+      <div class="chips">${[1,2,3,4,5,6].map(f=>`<button class="chip" data-fase="${f}" aria-pressed="${fsel.includes(f)}">Fase ${f}</button>`).join("")}</div></div>
+    <div class="fgrupo"><h5>Matérias <button data-mpre="">Todas</button><button data-mpre="alta">Prioridade alta</button></h5>
+      <div class="chips">${MAT.map(m=>{const ok=noRecorte(m.fases,s.recorte);const c=Q.filter(q=>q.materia===m.id&&(!s.fonte||q.fonte===s.fonte)&&noRecorte(q.fases,s.recorte)).length;
+        return `<button class="chip" data-mat="${m.id}" aria-pressed="${sel.has(m.id)}" ${ok?"":"disabled"} title="${esc(m.grupo)} · fases ${m.fases.join(", ")}">${esc(m.titulo.split(" (")[0])}<span class="c">${c}</span></button>`}).join("")}</div></div>
+  </details>`;
 }
 function renderTreino(){
   const s=trainState,q=s.list[s.i];
@@ -373,7 +395,16 @@ function renderTreino(){
   $("#tr-prev").onclick=()=>{s.i--;renderTreino()};
   $("#tr-next").onclick=()=>{if(s.i<s.list.length-1){s.i++;renderTreino()}else startTrain()};
 }
-function bindFilters(){["fonte","recorte","materia"].forEach(k=>{const el=$("#tr-"+k);if(el)el.onchange=()=>{trainState[k]=el.value;if(k==="recorte"){store.set("recorte",el.value);sim.recorte=el.value;if(!sim.on)renderSim();if(trainState.materia&&!noRecorte((MBY[trainState.materia]||{}).fases,el.value))trainState.materia=""}startTrain()}})}
+function bindFilters(){
+  const aplicar=()=>{store.set("materias",trainState.materias);store.set("recorte",trainState.recorte);sim.recorte=trainState.recorte;if(!sim.on)renderSim();startTrain()};
+  const limparFora=()=>{trainState.materias=trainState.materias.filter(id=>noRecorte((MBY[id]||{}).fases,trainState.recorte))};
+  const det=$("#tr-filtros");if(det)det.ontoggle=()=>store.set("filtrosAbertos",det.open);
+  const fonte=$("#tr-fonte");if(fonte)fonte.onchange=()=>{trainState.fonte=fonte.value;startTrain()};
+  document.querySelectorAll("#treino [data-fase]").forEach(b=>b.onclick=()=>{const fs=new Set(fasesDoRecorte(trainState.recorte)||[]);const f=+b.dataset.fase;fs.has(f)?fs.delete(f):fs.add(f);trainState.recorte=recorteDe([...fs]);limparFora();aplicar()});
+  document.querySelectorAll("#treino [data-fpre]").forEach(b=>b.onclick=()=>{trainState.recorte=b.dataset.fpre;limparFora();aplicar()});
+  document.querySelectorAll("#treino [data-mat]").forEach(b=>b.onclick=()=>{const id=b.dataset.mat,m=trainState.materias;trainState.materias=m.includes(id)?m.filter(x=>x!==id):[...m,id];aplicar()});
+  document.querySelectorAll("#treino [data-mpre]").forEach(b=>b.onclick=()=>{trainState.materias=b.dataset.mpre==="alta"?MAT.filter(m=>m.prioridade===3&&noRecorte(m.fases,trainState.recorte)).map(m=>m.id):[];aplicar()});
+}
 
 // ---- simulado
 const sim={on:false,list:[],ans:{},i:0,done:false,n:20,fonte:"",recorte:store.get("recorte","")};
@@ -389,7 +420,7 @@ function renderSim(){
     <div class="row">${recorteSelect("sim-recorte",sim.recorte)}<select id="sim-n" aria-label="Quantidade">${[10,20,30,40].map(n=>`<option ${n===sim.n?"selected":""} value="${n}">${n} questões</option>`).join("")}</select>
     ${temPessoais?`<select id="sim-fonte" aria-label="Origem"><option value="">Todas as origens</option>${Object.entries(FONTES).map(([k,v])=>`<option value="${k}" ${sim.fonte===k?"selected":""}>${v}</option>`).join("")}</select>`:""}
     <button class="btn primary" id="sim-go">Começar simulado</button></div>`;
-    $("#sim-n").onchange=e=>sim.n=+e.target.value;$("#sim-recorte").onchange=e=>{sim.recorte=e.target.value;store.set("recorte",sim.recorte);trainState.recorte=sim.recorte;if(trainState.materia&&!noRecorte((MBY[trainState.materia]||{}).fases,sim.recorte))trainState.materia="";startTrain()};const f=$("#sim-fonte");if(f)f.onchange=e=>sim.fonte=e.target.value;
+    $("#sim-n").onchange=e=>sim.n=+e.target.value;$("#sim-recorte").onchange=e=>{sim.recorte=e.target.value;store.set("recorte",sim.recorte);trainState.recorte=sim.recorte;trainState.materias=trainState.materias.filter(id=>noRecorte((MBY[id]||{}).fases,sim.recorte));startTrain()};const f=$("#sim-fonte");if(f)f.onchange=e=>sim.fonte=e.target.value;
     $("#sim-go").onclick=()=>{sim.list=buildSim();if(!sim.list.length)return;sim.ans={};sim.i=0;sim.done=false;sim.on=true;renderSim()};return;
   }
   if(sim.done){
