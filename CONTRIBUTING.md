@@ -21,6 +21,10 @@ Pode (e deve):
 - resumir conceitos com suas palavras;
 - colocar **links** para materiais de referência.
 
+## Só depois que a fase termina
+
+Envie questões e resumos sobre uma fase **somente depois que ela terminar**. Enquanto a fase está em andamento, não abra pull requests nem issues com questões dela. O site avisa que o banco é alimentado após o fim de cada fase.
+
 ## Adicionando uma questão
 
 Crie um arquivo em `questoes/<matéria>/<nome>.json`. A pasta precisa ter o mesmo nome de um arquivo em `materias/` (ex.: `questoes/heap/` ↔ `materias/heap.md`). O nome do arquivo é livre; use algo descritivo ou um número (`heapify-down.json`, `012.json`). Um arquivo por questão evita conflitos entre contribuições.
@@ -44,7 +48,7 @@ Crie um arquivo em `questoes/<matéria>/<nome>.json`. A pasta precisa ter o mesm
 | `explicacao` | sim | Por que a correta é a correta. Uma ou duas frases. |
 | `codigo` | não | Trecho de código mostrado abaixo do enunciado. Use `\n` para as linhas. |
 | `linguagem` | não | `"python"` (padrão) ou outra. Código Python é compilado na validação para pegar erro de sintaxe. |
-| `fase` | não | Número da fase (1 a 7) em que o assunto aparece. |
+| `fase` | não | Fase (1 a 7) em que o assunto da questão aparece. Se omitido, a questão herda as fases da matéria. Preencha quando a matéria aparece em várias fases e a questão é de uma só (ex.: heap sort é Fase 2, heapify é Fase 6). |
 | `autor` | não | Seu usuário do GitHub, para aparecer no crédito. |
 
 Dicas para uma boa questão:
@@ -97,6 +101,7 @@ Resumo em Markdown: listas, **negrito**, `código`, tabelas e blocos de código.
 | `grupo` | Agrupa as matérias na aba Matérias (ex.: `Estrutura de dados`, `Python`). |
 | `prioridade` | `alta`, `media` ou `baixa`. Define a ordem do roteiro e o peso no simulado. Use `alta` para os temas centrais de estudo. |
 | `ordem` | Número para ordenar as matérias. |
+| `fases` | Opcional. Fases em que o assunto aparece, ex.: `2, 6`. Se omitido, é deduzido dos links `Fase N · Cap M` em `fiap`. Aparece no site e alimenta o filtro de fases. |
 | `fiap` | Capítulos do FIAP ON onde o assunto aparece, no formato `Texto | URL`. |
 | `links` | Materiais externos gratuitos (documentação, visualizações, vídeos), no formato `Texto | URL`. |
 

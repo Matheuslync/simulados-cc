@@ -101,6 +101,20 @@ details.topic[open]>summary h3::after{content:" −"}
 .revitem.bad{border-left:4px solid var(--bad)} .revitem.ok{border-left:4px solid var(--ok)}
 .small{font-size:13px;color:var(--muted)}
 footer{border-top:1px solid var(--line);margin-top:40px;padding-top:16px}
+.passos{padding-left:22px;max-width:72ch;margin:0 0 12px}
+.passos li{margin-bottom:6px}
+.aviso{background:var(--code);border-radius:8px;padding:10px 14px;font-size:14px;max-width:72ch;margin:6px 0 4px}
+.fz{display:inline-block;font:600 11px var(--f-mono);padding:1px 6px;border-radius:4px;background:var(--accent-soft);color:var(--accent);margin-right:3px}
+.fz.tarde{background:var(--hot-soft);color:var(--hot)}
+.matriz{border-collapse:collapse;font-size:14px;margin:10px 0 6px}
+.matriz th,.matriz td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+.matriz th:first-child,.matriz td:first-child{text-align:left;padding-left:0}
+.matriz td.on{color:var(--accent);font-weight:700}
+.matriz td.on.tarde{color:var(--hot)}
+.matriz td.off{color:var(--line)}
+.matriz button{background:none;border:0;padding:0;color:var(--fg);font:500 14px var(--f-body);cursor:pointer;text-align:left}
+.matriz button:hover{color:var(--accent);text-decoration:underline}
+.matriz .sep{border-left:2px solid var(--line)}
 @media (max-width:520px){.qcard{padding:14px}.plan-item{grid-template-columns:auto 1fr}.plan-item .row{grid-column:2}}
 @media (prefers-reduced-motion:no-preference){.opt{transition:border-color .12s,background .12s}}
 </style>
@@ -158,8 +172,12 @@ const tabs=[...document.querySelectorAll("#tabs button")];
 function show(t){tabs.forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));document.querySelectorAll("main>section").forEach(s=>s.hidden=s.id!==t);store.set("tab",t);if(t==="erros")renderErros()}
 tabs.forEach(b=>b.onclick=()=>{show(b.dataset.tab);window.scrollTo(0,0)});
 const cnt=id=>Q.filter(q=>q.materia===id).length;
+const RECORTES={"":"Todas as fases","1-4":"Fases 1 a 4","5-6":"Fases 5 e 6","1":"Fase 1","2":"Fase 2","3":"Fase 3","4":"Fase 4","5":"Fase 5","6":"Fase 6"};
+const noRecorte=(fases,r)=>{if(!r)return true;const [a,b]=r.includes("-")?r.split("-").map(Number):[+r,+r];return (fases||[]).some(f=>f>=a&&f<=b)};
+const chips=fases=>(fases||[]).map(f=>`<span class="fz ${f>=5?"tarde":""}" title="Fase ${f}">F${f}</span>`).join("");
+function recorteSelect(id,val){return `<select id="${id}" aria-label="Fases">${Object.entries(RECORTES).map(([k,v])=>`<option value="${k}" ${val===k?"selected":""}>${v}</option>`).join("")}</select>`}
 function abrirMateria(id){show("materias");const el=document.getElementById("m-"+id);if(el){el.open=true;el.scrollIntoView()}}
-function treinarMateria(id){Object.assign(trainState,{materia:id,fonte:"",fase:""});startTrain();show("treino");window.scrollTo(0,0)}
+function treinarMateria(id){Object.assign(trainState,{materia:id,fonte:"",recorte:""});startTrain();show("treino");window.scrollTo(0,0)}
 
 // ---- roteiro
 function renderRoteiro(){
@@ -174,11 +192,26 @@ function renderRoteiro(){
     <p><b>Matemática:</b> derivada e gradiente descendente (achar o mínimo).</p>
     <p><b>Energia, sustentabilidade e IA:</b> conceitos principais e leitura atenta dos enunciados.</p>
   </div>
+  <h2>Como estudar</h2>
+  <ol class="passos">
+    <li><b>Leia o resumo</b> da matéria na aba Matérias. Comece pelas de prioridade alta.</li>
+    <li><b>Abra o capítulo no FIAP ON</b> pelo link da matéria e refaça o <b>fast test</b> do fim do capítulo. Ele mostra a explicação de cada alternativa.</li>
+    <li><b>Revise o quiz da fase</b> no FIAP ON depois que a fase fecha: na página do quiz, abra a revisão da sua tentativa e releia as que errou.</li>
+    <li><b>Treine aqui</b> as questões da matéria, uma por vez, com correção na hora.</li>
+    <li><b>Faça um simulado</b> no recorte de fases que quer cobrir e refaça o que errou na aba Erros.</li>
+  </ol>
+  <div class="aviso"><b>Sobre as questões:</b> o banco é alimentado depois que cada fase termina. Matérias da fase em andamento só ganham questões após o encerramento dela, então a fase atual pode aparecer com poucas ou nenhuma questão.</div>
+  <h2>Em que fase está cada matéria</h2>
+  <p class="lead">Ainda não há consenso sobre o recorte: há quem diga que vale das fases 1 a 4 e há quem diga que entram também a 5 e a 6. A tabela mostra onde cada matéria aparece, para você decidir o que priorizar. <span class="fz">F1–F4</span> em azul, <span class="fz tarde">F5–F6</span> em laranja. Nos filtros de Treinar e Simulado dá para escolher o recorte.</p>
+  <div style="overflow-x:auto"><table class="matriz"><thead><tr><th>Matéria</th>${[1,2,3,4,5,6].map(f=>`<th class="${f===5?"sep":""}">F${f}</th>`).join("")}<th>Só em 5–6?</th></tr></thead><tbody>
+  ${MAT.slice().sort((a,b)=>b.prioridade-a.prioridade||a.ordem-b.ordem).map(m=>{const caps=f=>m.fiap.filter(l=>l.texto.includes("Fase "+f+" ")).map(l=>l.texto).join("\n");return `<tr><td><button data-res="${m.id}">${esc(m.titulo)}</button> <span class="pill p${m.prioridade}">${PRIO[m.prioridade]}</span></td>${[1,2,3,4,5,6].map(f=>m.fases.includes(f)?`<td class="on ${f>=5?"tarde":""} ${f===5?"sep":""}" title="${esc(caps(f))}">●</td>`:`<td class="off ${f===5?"sep":""}">·</td>`).join("")}<td class="small">${m.fases.length&&m.fases.every(f=>f>=5)?"<b>sim</b>":""}</td></tr>`}).join("")}
+  </tbody></table></div>
+  <h2>Roteiro de estudo</h2>
   <p class="lead">Estude primeiro as matérias de prioridade <span class="pill p3">alta</span>: leia o resumo, treine as questões da matéria e feche com um simulado. Marque cada matéria quando se sentir seguro.</p>
   <div class="plan">${order.map(m=>`
     <div class="plan-item ${done[m.id]?"done":""}">
       <input type="checkbox" id="chk-${m.id}" data-id="${m.id}" ${done[m.id]?"checked":""} aria-label="Marcar ${esc(m.titulo)} como revisada">
-      <div><h3>${esc(m.titulo)}</h3><div class="meta"><span class="pill p${m.prioridade}">${PRIO[m.prioridade]}</span> ${esc(m.grupo)} · ${cnt(m.id)} questões</div></div>
+      <div><h3>${esc(m.titulo)}</h3><div class="meta"><span class="pill p${m.prioridade}">${PRIO[m.prioridade]}</span> ${chips(m.fases)} ${esc(m.grupo)} · ${cnt(m.id)} questões</div></div>
       <div class="row"><button class="btn" data-res="${m.id}">Resumo</button><button class="btn" data-tr="${m.id}">Treinar</button></div>
     </div>`).join("")}</div>`;
   $("#roteiro").querySelectorAll("input[type=checkbox]").forEach(c=>c.onchange=()=>{const d=store.get("done",{});d[c.dataset.id]=c.checked;store.set("done",d);c.closest(".plan-item").classList.toggle("done",c.checked)});
@@ -193,7 +226,7 @@ function renderMaterias(){
   $("#materias").innerHTML=`<h2>Matérias</h2><p class="lead">Resumo de cada matéria com os capítulos da FIAP onde ela aparece e links para se aprofundar. As de prioridade alta já vêm abertas. Achou um erro ou quer melhorar um resumo? ${repoLink("/tree/main/materias","Edite o arquivo da matéria no GitHub")}.</p>`+
   grupos.map(g=>`<div class="group-label">${esc(g)}</div>`+MAT.filter(m=>m.grupo===g).map(m=>`
     <details class="topic" id="m-${m.id}" ${m.prioridade===3?"open":""}>
-      <summary><h3>${esc(m.titulo)}</h3><span class="meta"><span class="pill p${m.prioridade}">${PRIO[m.prioridade]}</span> ${cnt(m.id)} questões</span></summary>
+      <summary><h3>${esc(m.titulo)}</h3><span class="meta">${chips(m.fases)} <span class="pill p${m.prioridade}">${PRIO[m.prioridade]}</span> ${cnt(m.id)} questões</span></summary>
       <div class="topic-body">${md(m.md)}
         <div class="linkbox">
           <div><h4>No FIAP ON (precisa de login)</h4>${linkList(m.fiap)}</div>
@@ -209,8 +242,8 @@ function renderMaterias(){
 function qHTML(q,idx,total){
   const m=MBY[q.materia];
   const meta=[`<span class="pill">${q.fonte==="pessoal"?esc(q.origem||"Pessoal"):"Comunidade"}</span>`];
-  if(q.fase&&q.fonte!=="pessoal")meta.push("Fase "+q.fase);
   if(m)meta.push(esc(m.titulo));
+  meta.push(chips(q.fases));
   if(q.autor)meta.push("por "+esc(q.autor));
   if(total)meta.push(`<span style="margin-left:auto">${idx+1}/${total}</span>`);
   return `<div class="qmeta">${meta.join(" · ")}</div>
@@ -220,16 +253,15 @@ function qHTML(q,idx,total){
 const explHTML=(q,pick)=>`<div class="exp"><b class="${pick===q.resposta?"ok":"bad"}">${pick===q.resposta?"Correto.":"Incorreto."}</b> Resposta: <b>${"ABCDEF"[q.resposta]}</b>. ${esc(q.explicacao)}</div>`;
 
 // ---- treino
-const trainState={fonte:"",fase:"",materia:"",list:[],i:0,answered:{}};
+const trainState={fonte:"",recorte:store.get("recorte",""),materia:"",list:[],i:0,answered:{}};
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
-const filterQ=s=>Q.filter(q=>(!s.fonte||q.fonte===s.fonte)&&(!s.fase||String(q.fase)===s.fase)&&(!s.materia||q.materia===s.materia));
+const filterQ=s=>Q.filter(q=>(!s.fonte||q.fonte===s.fonte)&&noRecorte(q.fases,s.recorte)&&(!s.materia||q.materia===s.materia));
 function startTrain(){trainState.list=shuffle(filterQ(trainState));trainState.i=0;trainState.answered={};renderTreino()}
 function filtersHTML(s){
-  const fases=[...new Set(Q.map(q=>q.fase).filter(Boolean))].sort();
   return `<div class="row">
     ${temPessoais?`<select id="tr-fonte" aria-label="Origem"><option value="">Todas as origens</option>${Object.entries(FONTES).map(([k,v])=>`<option value="${k}" ${s.fonte===k?"selected":""}>${v}</option>`).join("")}</select>`:""}
-    ${fases.length?`<select id="tr-fase" aria-label="Fase"><option value="">Todas as fases</option>${fases.map(f=>`<option value="${f}" ${String(s.fase)===String(f)?"selected":""}>Fase ${f}</option>`).join("")}</select>`:""}
-    <select id="tr-materia" aria-label="Matéria"><option value="">Todas as matérias</option>${MAT.map(m=>`<option value="${m.id}" ${s.materia===m.id?"selected":""}>${esc(m.titulo)} (${cnt(m.id)})</option>`).join("")}</select>
+    ${recorteSelect("tr-recorte",s.recorte)}
+    <select id="tr-materia" aria-label="Matéria"><option value="">Todas as matérias</option>${MAT.filter(m=>noRecorte(m.fases,s.recorte)).map(m=>`<option value="${m.id}" ${s.materia===m.id?"selected":""}>${esc(m.titulo)} (${cnt(m.id)})</option>`).join("")}</select>
   </div>`;
 }
 function renderTreino(){
@@ -246,24 +278,24 @@ function renderTreino(){
   $("#tr-prev").onclick=()=>{s.i--;renderTreino()};
   $("#tr-next").onclick=()=>{if(s.i<s.list.length-1){s.i++;renderTreino()}else startTrain()};
 }
-function bindFilters(){["fonte","fase","materia"].forEach(k=>{const el=$("#tr-"+k);if(el)el.onchange=()=>{trainState[k]=el.value;startTrain()}})}
+function bindFilters(){["fonte","recorte","materia"].forEach(k=>{const el=$("#tr-"+k);if(el)el.onchange=()=>{trainState[k]=el.value;if(k==="recorte"){store.set("recorte",el.value);sim.recorte=el.value;if(!sim.on)renderSim();if(trainState.materia&&!noRecorte((MBY[trainState.materia]||{}).fases,el.value))trainState.materia=""}startTrain()}})}
 
 // ---- simulado
-const sim={on:false,list:[],ans:{},i:0,done:false,n:20,fonte:""};
+const sim={on:false,list:[],ans:{},i:0,done:false,n:20,fonte:"",recorte:store.get("recorte","")};
 function buildSim(){
-  const pool=Q.filter(q=>!sim.fonte||q.fonte===sim.fonte);
+  const pool=Q.filter(q=>(!sim.fonte||q.fonte===sim.fonte)&&noRecorte(q.fases,sim.recorte));
   const w=q=>{const p=(MBY[q.materia]||{prioridade:2}).prioridade;return Math.random()**(1/(p===3?3:p===2?1.6:1))};
   return pool.map(q=>[w(q),q]).sort((a,b)=>b[0]-a[0]).slice(0,sim.n).map(x=>x[1]);
 }
 function renderSim(){
   const el=$("#simulado");
   if(!sim.on){
-    el.innerHTML=`<h2>Simulado</h2><p class="lead">Questões sorteadas com mais peso para as matérias de prioridade alta. A correção só aparece no final.</p>
-    <div class="row"><select id="sim-n" aria-label="Quantidade">${[10,20,30,40].map(n=>`<option ${n===sim.n?"selected":""} value="${n}">${n} questões</option>`).join("")}</select>
+    el.innerHTML=`<h2>Simulado</h2><p class="lead">Questões sorteadas com mais peso para as matérias de prioridade alta. A correção só aparece no final. Escolha o recorte de fases que quer treinar.</p>
+    <div class="row">${recorteSelect("sim-recorte",sim.recorte)}<select id="sim-n" aria-label="Quantidade">${[10,20,30,40].map(n=>`<option ${n===sim.n?"selected":""} value="${n}">${n} questões</option>`).join("")}</select>
     ${temPessoais?`<select id="sim-fonte" aria-label="Origem"><option value="">Todas as origens</option>${Object.entries(FONTES).map(([k,v])=>`<option value="${k}" ${sim.fonte===k?"selected":""}>${v}</option>`).join("")}</select>`:""}
     <button class="btn primary" id="sim-go">Começar simulado</button></div>`;
-    $("#sim-n").onchange=e=>sim.n=+e.target.value;const f=$("#sim-fonte");if(f)f.onchange=e=>sim.fonte=e.target.value;
-    $("#sim-go").onclick=()=>{sim.list=buildSim();sim.ans={};sim.i=0;sim.done=false;sim.on=true;renderSim()};return;
+    $("#sim-n").onchange=e=>sim.n=+e.target.value;$("#sim-recorte").onchange=e=>{sim.recorte=e.target.value;store.set("recorte",sim.recorte);trainState.recorte=sim.recorte;if(trainState.materia&&!noRecorte((MBY[trainState.materia]||{}).fases,sim.recorte))trainState.materia="";startTrain()};const f=$("#sim-fonte");if(f)f.onchange=e=>sim.fonte=e.target.value;
+    $("#sim-go").onclick=()=>{sim.list=buildSim();if(!sim.list.length)return;sim.ans={};sim.i=0;sim.done=false;sim.on=true;renderSim()};return;
   }
   if(sim.done){
     const ok=sim.list.filter(q=>sim.ans[q.id]===q.resposta).length;
@@ -296,7 +328,7 @@ function renderErros(){
   const go=$("#err-go");if(go)go.onclick=()=>{Object.assign(trainState,{list:shuffle(wrong),i:0,answered:{}});renderTreino();show("treino")};
 }
 
-$("#rodape").innerHTML=`Material colaborativo, feito por alunos para alunos. Não é um material oficial da FIAP. ${REPO?`${repoLink("","Código e conteúdo no GitHub")} · ${repoLink("/blob/main/CONTRIBUTING.md","Como contribuir")} · ${repoLink("/issues/new?template=nova-questao.yml","Sugerir questão sem usar git")} · `:""}Atualizado em ${esc(window.DADOS.gerado_em)}.`;
+$("#rodape").innerHTML=`Material colaborativo, feito por alunos para alunos. Não é um material oficial da FIAP. As questões são adicionadas depois que cada fase termina. ${REPO?`${repoLink("","Código e conteúdo no GitHub")} · ${repoLink("/blob/main/CONTRIBUTING.md","Como contribuir")} · ${repoLink("/issues/new?template=nova-questao.yml","Sugerir questão sem usar git")} · `:""}Atualizado em ${esc(window.DADOS.gerado_em)}.`;
 renderStats();renderRoteiro();renderMaterias();startTrain();renderSim();
 const hash=location.hash.slice(1);
 if(MBY[hash])abrirMateria(hash);else show(store.get("tab","roteiro"));

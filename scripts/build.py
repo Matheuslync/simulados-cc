@@ -75,6 +75,24 @@ def ler_links(arquivo, itens, campo):
     return links
 
 
+def ler_fases(arquivo, valor, fiap):
+    """Fases da matéria: campo 'fases: 1, 2, 6' ou, se ausente, deduzidas de 'Fase N' nos links do FIAP."""
+    if valor:
+        try:
+            fases = sorted({int(x) for x in str(valor).replace(" ", "").split(",") if x})
+        except ValueError:
+            erro(arquivo, f"fases deve ser uma lista de números separados por vírgula (recebido: {valor!r})")
+            return []
+    else:
+        fases = sorted({int(n) for l in fiap for n in re.findall(r"Fase (\d+)", l["texto"])})
+    if not fases:
+        aviso(arquivo, "sem fase: adicione 'fases: 1, 2' ou links 'Fase N · Cap M' em fiap")
+    for f in fases:
+        if not 1 <= f <= 7:
+            erro(arquivo, f"fase fora do intervalo 1 a 7: {f}")
+    return fases
+
+
 def carregar_materias():
     materias = []
     for arquivo in sorted(MATERIAS.glob("*.md")):
@@ -90,13 +108,16 @@ def carregar_materias():
             erro(arquivo, f"prioridade deve ser alta, media ou baixa (recebido: {prio!r})")
         if len(corpo) < 80:
             aviso(arquivo, "resumo muito curto")
+        fiap = ler_links(arquivo, meta.get("fiap"), "fiap")
+        fases = ler_fases(arquivo, meta.get("fases"), fiap)
         materias.append({
             "id": mid,
             "titulo": meta.get("titulo", mid),
             "grupo": meta.get("grupo", "Outros"),
             "prioridade": PRIORIDADES.get(prio, 2),
             "ordem": int(meta.get("ordem", 99)) if str(meta.get("ordem", "99")).isdigit() else 99,
-            "fiap": ler_links(arquivo, meta.get("fiap"), "fiap"),
+            "fases": fases,
+            "fiap": fiap,
             "links": ler_links(arquivo, meta.get("links"), "links"),
             "md": corpo,
         })
@@ -223,11 +244,11 @@ MARCA_INI, MARCA_FIM = "<!-- materias:inicio -->", "<!-- materias:fim -->"
 def tabela_readme(materias, por_materia):
     """Tabela de matérias do README, gerada a partir de materias/*.md."""
     rotulo = {3: "🔴 alta", 2: "🟡 média", 1: "⚪ baixa"}
-    linhas = ["| Matéria | Prioridade | Questões | Capítulos FIAP | Para se aprofundar |", "|---|---|---|---|---|"]
+    linhas = ["| Matéria | Fases | Prioridade | Questões | Capítulos FIAP | Para se aprofundar |", "|---|---|---|---|---|---|"]
     for m in sorted(materias, key=lambda m: (-m["prioridade"], m["ordem"])):
         fiap = "<br>".join(f"[{l['texto'].split(' — ')[0]}]({l['url']})" for l in m["fiap"]) or "—"
         ext = "<br>".join(f"[{l['texto']}]({l['url']})" for l in m["links"]) or "—"
-        linhas.append(f"| [{m['titulo']}](materias/{m['id']}.md) | {rotulo[m['prioridade']]} | {por_materia[m['id']]} | {fiap} | {ext} |")
+        linhas.append(f"| [{m['titulo']}](materias/{m['id']}.md) | {' · '.join(map(str, m['fases'])) or '—'} | {rotulo[m['prioridade']]} | {por_materia[m['id']]} | {fiap} | {ext} |")
     return "\n".join(linhas)
 
 
@@ -273,6 +294,10 @@ def main():
     atualizar_readme(materias, por_materia, escrever=not so_checar)
     if so_checar:
         return
+
+    fases_materia = {m["id"]: m["fases"] for m in materias}
+    for q in questoes + privadas:
+        q["fases"] = [q["fase"]] if q["fase"] else fases_materia.get(q["materia"], [])
 
     dados = {
         "materias": sorted(materias, key=lambda m: (m["ordem"], m["titulo"])),

@@ -8,6 +8,7 @@ body:
       value: |
         Obrigado por contribuir! Envie só questões **escritas por você**.
         Não copie material de terceiros (livros, sites ou plataformas de ensino).
+        Envie questões apenas de fases que já terminaram.
   - type: dropdown
     id: materia
     attributes:
