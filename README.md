@@ -2,7 +2,7 @@
 
 Resumos, links e um banco de questões **colaborativo** para estudar para a prova de Ciência da Computação da FIAP (1º ano), com foco nas fases 1 a 4 e no que também pode cair das fases 5 e 6.
 
-**Site:** depois de publicado, fica em `https://<usuario>.github.io/prova-fiap-cc/` (veja [Publicando o site](#publicando-o-site)).
+**Site:** https://matheuslync.github.io/prova-fiap-cc/
 
 O site tem:
 
@@ -59,7 +59,7 @@ Tabela gerada automaticamente a partir de [`materias/`](materias/) pelo `scripts
 Precisa só do Python 3.9 ou mais novo, sem instalar nada.
 
 ```bash
-git clone https://github.com/<usuario>/prova-fiap-cc.git
+git clone https://github.com/Matheuslync/prova-fiap-cc.git
 cd prova-fiap-cc
 python3 scripts/build.py      # valida tudo e gera site/dados.js
 open site/index.html          # macOS; no Linux: xdg-open, no Windows: start
@@ -104,7 +104,7 @@ privado/           suas questões oficiais locais (ignorado pelo git)
 
 ## Publicando o site
 
-O workflow `.github/workflows/pages.yml` gera e publica o site. Enquanto o repositório for privado ele só roda manualmente, porque o GitHub Pages exige repositório público no plano gratuito. Para publicar: torne o repositório público, em **Settings → Pages → Build and deployment** escolha **GitHub Actions** como fonte e volte a incluir o gatilho `push` no início do workflow (está comentado lá).
+O workflow `.github/workflows/pages.yml` gera e publica o site a cada push na `main` (fonte do GitHub Pages: **GitHub Actions**). Em um fork, ative em **Settings → Pages → Build and deployment → GitHub Actions**.
 
 ## Aviso
 
