@@ -17,7 +17,7 @@ Seu progresso fica salvo no navegador. Não há login nem servidor.
 ## Como estudar
 
 1. **Leia o resumo** da matéria (aba Matérias do site ou pasta [`materias/`](materias/)). Comece pelas de prioridade alta.
-2. **Abra o capítulo no FIAP ON** pelo link da matéria e refaça o **fast test** do fim do capítulo; ele mostra a explicação de cada alternativa.
+2. **Abra o capítulo no FIAP ON** pelo link da matéria e releia o **fast test** do fim do capítulo. Ele não pode ser refeito, mas depois de respondido mostra a alternativa correta e a explicação; tente responder de cabeça antes de olhar.
 3. **Revise o quiz da fase** no FIAP ON depois que a fase fecha: na página do quiz, abra a revisão da sua tentativa e releia as que errou.
 4. **Treine no site** as questões da matéria, com correção na hora.
 5. **Faça um simulado** no recorte de fases que quer cobrir (1 a 4, 5 e 6 ou uma fase só) e refaça o que errou na aba Erros.
