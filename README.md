@@ -77,6 +77,41 @@ python3 scripts/build.py      # valida tudo e gera site/dados.js
 open site/index.html          # macOS; no Linux: xdg-open, no Windows: start
 ```
 
+## Seu banco de questões
+
+Tem questões suas em um arquivo `.json`? No site, na aba **Roteiro**, use **Importar arquivo .json**. Elas passam a aparecer em Treinar, Simulado e Erros junto com as do site, com a etiqueta e o filtro **Pessoal (local)**, inclusive com o guia de revisão nos erros.
+
+- As questões importadas ficam **só no navegador de quem importou** (armazenamento local). Não são enviadas para o GitHub nem para ninguém, e outras pessoas que abrem o site não as veem.
+- Dá para importar vários arquivos; questões com o mesmo `id` são substituídas. O botão **Remover questões importadas** apaga tudo.
+- Em outro navegador ou aparelho, é preciso importar de novo. Em janela anônima, nada fica salvo.
+- Questões com problema (matéria inexistente, resposta inválida…) são ignoradas e listadas depois da importação.
+
+Formato: uma lista de questões no mesmo formato das questões do repositório, mais o campo `materia` (o nome de um arquivo de [`materias/`](materias/), sem `.md`):
+
+```json
+[
+  {
+    "materia": "python-arquivos",
+    "pergunta": "Qual método posiciona o cursor em um ponto do arquivo?",
+    "alternativas": ["read", "write", "seek", "count"],
+    "resposta": "C",
+    "explicacao": "seek(n) leva o cursor para a posição n.",
+    "fase": 5,
+    "origem": "Minhas anotações"
+  }
+]
+```
+
+| Campo | Obrigatório | Descrição |
+|---|---|---|
+| `materia` | sim | Id da matéria, ex.: `heap`, `mapa-de-karnaugh`, `python-arquivos` |
+| `pergunta`, `alternativas`, `resposta` | sim | Como nas questões do repositório; `resposta` pode ser letra (`"C"`) ou índice (`2`) |
+| `explicacao`, `codigo`, `fase` | não | Como nas questões do repositório |
+| `origem` | não | Etiqueta exibida na questão (ex.: "Minhas anotações") |
+| `id` | não | Identificador para substituir a questão ao reimportar |
+
+Quem roda o site no próprio computador também pode colocar esses arquivos na pasta `privado/` (ignorada pelo git): o `python3 scripts/build.py` os inclui no `site/dados.js` local.
+
 ## Contribuindo
 
 Contribuições são muito bem-vindas, principalmente **questões novas** das matérias de prioridade alta. Cada questão é um arquivo JSON pequeno em `questoes/<matéria>/`, e dá para criar direto pelo navegador no GitHub. Quem não usa git pode [sugerir uma questão por formulário](../../issues/new?template=nova-questao.yml).
