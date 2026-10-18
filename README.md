@@ -104,7 +104,7 @@ privado/           suas questões oficiais locais (ignorado pelo git)
 
 ## Publicando o site
 
-O workflow `.github/workflows/pages.yml` gera e publica o site a cada push na `main`. Para ativar, em **Settings → Pages → Build and deployment**, escolha **GitHub Actions** como fonte.
+O workflow `.github/workflows/pages.yml` gera e publica o site. Enquanto o repositório for privado ele só roda manualmente, porque o GitHub Pages exige repositório público no plano gratuito. Para publicar: torne o repositório público, em **Settings → Pages → Build and deployment** escolha **GitHub Actions** como fonte e volte a incluir o gatilho `push` no início do workflow (está comentado lá).
 
 ## Aviso
 

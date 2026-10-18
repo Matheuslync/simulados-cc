@@ -1,8 +1,10 @@
 name: Publicar site
 
+# Desativado no push enquanto o repositório é privado (GitHub Pages exige repositório
+# público no plano gratuito). Ao tornar público, volte a incluir:
+#   push:
+#     branches: [main]
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
