@@ -101,6 +101,19 @@ details.topic[open]>summary h3::after{content:" −"}
 .revitem.bad{border-left:4px solid var(--bad)} .revitem.ok{border-left:4px solid var(--ok)}
 .small{font-size:13px;color:var(--muted)}
 footer{border-top:1px solid var(--line);margin-top:40px;padding-top:16px}
+.guia{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px;font-size:14px}
+.guia h5{font:600 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.trecho{background:var(--accent-soft);border-radius:6px;padding:8px 12px;margin:0 0 8px;max-width:72ch}
+.trecho>*:last-child{margin-bottom:0}
+.trecho table{margin:0}
+.guia .row{gap:6px}
+.guia .btn{font-size:13px;padding:5px 10px}
+.revisar{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-top:16px}
+.revisar h3{margin-bottom:8px}
+.revisar-item{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:baseline;padding:10px 0;border-top:1px solid var(--line)}
+.revisar-item:first-of-type{border-top:0}
+.revisar-item .n{font:800 20px var(--f-display);color:var(--bad);font-variant-numeric:tabular-nums}
+.destaque{outline:3px solid var(--hot);outline-offset:3px;border-radius:4px;transition:outline-color 1.5s}
 .passos{padding-left:22px;max-width:72ch;margin:0 0 12px}
 .passos li{margin-bottom:6px}
 .aviso{background:var(--code);border-radius:8px;padding:10px 14px;font-size:14px;max-width:72ch;margin:6px 0 4px}
@@ -176,7 +189,50 @@ const RECORTES={"":"Todas as fases","1-4":"Fases 1 a 4","5-6":"Fases 5 e 6","1":
 const noRecorte=(fases,r)=>{if(!r)return true;const [a,b]=r.includes("-")?r.split("-").map(Number):[+r,+r];return (fases||[]).some(f=>f>=a&&f<=b)};
 const chips=fases=>(fases||[]).map(f=>`<span class="fz ${f>=5?"tarde":""}" title="Fase ${f}">F${f}</span>`).join("");
 function recorteSelect(id,val){return `<select id="${id}" aria-label="Fases">${Object.entries(RECORTES).map(([k,v])=>`<option value="${k}" ${val===k?"selected":""}>${v}</option>`).join("")}</select>`}
-function abrirMateria(id){show("materias");const el=document.getElementById("m-"+id);if(el){el.open=true;el.scrollIntoView()}}
+function abrirMateria(id,bloco){show("materias");const el=document.getElementById("m-"+id);if(!el)return;el.open=true;
+  const alvo=bloco!=null&&BLOCOS[id]?BLOCOS[id][bloco]:null;
+  if(alvo){alvo.scrollIntoView({block:"center"});alvo.classList.add("destaque");setTimeout(()=>alvo.classList.remove("destaque"),2500)}else el.scrollIntoView()}
+
+// ---- guia de revisão: acha o trecho do resumo que responde a questão
+const PARE=new Set("a o e é de da do das dos em no na nos nas um uma uns umas para por com sem que qual quais quando como mais menos ser são está estão pode podem ou se seu sua seus suas ao aos à às pelo pela entre sobre sempre cada isso este esta esse essa ela ele elas eles tem ter the of".split(" "));
+const norm=t=>String(t).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+const tokens=t=>{const n=norm(t);const extra=[...n.matchAll(/[σΣ]m\s*\(([\d,\s]+)\)/gi)].map(x=>"m:"+x[1].replace(/\s/g,""));
+  return n.split(/[^a-z0-9²³ⁿ∇]+/).filter(w=>w.length>=3&&!PARE.has(w)).map(w=>w.slice(0,5)).concat(extra)};
+let BLOCOS={},BLOCOS_TOK={};
+function indexarBlocos(){
+  BLOCOS={};BLOCOS_TOK={};
+  MAT.forEach(m=>{const body=document.querySelector("#m-"+m.id+" .topic-body .md");if(!body)return;
+    const els=[...body.querySelectorAll("li, p, tr, pre, blockquote")].filter(e=>!e.closest("li li")&&!(e.tagName==="P"&&e.closest("li, blockquote"))&&e.textContent.trim().length>15&&!e.querySelector("th"));
+    BLOCOS[m.id]=els;BLOCOS_TOK[m.id]=els.map(e=>new Set(tokens(e.textContent)));});
+}
+function melhorTrecho(q){
+  const toks=BLOCOS_TOK[q.materia];if(!toks||!toks.length)return null;
+  const peso={};const add=(t,w)=>tokens(t).forEach(x=>peso[x]=Math.max(peso[x]||0,x.startsWith("m:")?6:w));
+  add(q.pergunta,1);add(q.explicacao,1.5);add(q.alternativas[q.resposta],2);if(q.codigo)add(q.codigo,.5);
+  const df=x=>toks.filter(s=>s.has(x)).length;
+  let best=-1,bi=-1;toks.forEach((s,i)=>{let sc=0;for(const x in peso)if(s.has(x))sc+=peso[x]*Math.log(1+toks.length/df(x));if(sc>best){best=sc;bi=i}});
+  return best>=2?bi:null;
+}
+function capitulosDa(q){const m=MBY[q.materia];if(!m)return[];const fs=q.fases||[];const caps=m.fiap.filter(l=>fs.some(f=>l.texto.includes("Fase "+f+" ")));return caps.length?caps:m.fiap}
+function guiaHTML(q){
+  const m=MBY[q.materia];if(!m)return"";
+  const bi=melhorTrecho(q);const el=bi!=null?BLOCOS[q.materia][bi]:null;
+  let trecho="";
+  if(el){const inner=el.tagName==="TR"?[...el.children].map(c=>c.innerHTML).join(" — "):el.tagName==="PRE"?el.outerHTML:el.innerHTML;trecho=`<div class="trecho">${inner}</div>`}
+  const caps=capitulosDa(q).slice(0,2),ext=m.links[0];
+  return `<div class="guia"><h5>Para revisar</h5>${trecho?`<div class="small">No resumo de ${esc(m.titulo)}:</div>${trecho}`:""}
+    <div class="row"><button class="btn" data-ir="${m.id}" data-bloco="${bi??""}">${el?"Ver no resumo":"Abrir resumo de "+esc(m.titulo)}</button>${caps.map(c=>`<a class="btn" href="${esc(c.url)}" target="_blank" rel="noopener">FIAP ON: ${esc(c.texto.split(" — ")[0])}</a>`).join("")}${ext?`<a class="btn" href="${esc(ext.url)}" target="_blank" rel="noopener">${esc(ext.texto.split(" — ")[0])}</a>`:""}</div></div>`;
+}
+function revisarHTML(erradas){
+  if(!erradas.length)return"";
+  const por={};erradas.forEach(q=>{(por[q.materia]=por[q.materia]||[]).push(q)});
+  const lista=Object.entries(por).sort((a,b)=>b[1].length-a[1].length||(MBY[b[0]]||{}).prioridade-(MBY[a[0]]||{}).prioridade);
+  return `<div class="revisar"><h3>O que revisar</h3><p class="small">Matérias em que você errou, da que mais errou para a que menos errou.</p>${lista.map(([mid,qs])=>{const m=MBY[mid]||{titulo:mid,fiap:[],fases:[]};const caps=[...new Map(qs.flatMap(capitulosDa).map(c=>[c.url,c])).values()].slice(0,3);
+    return `<div class="revisar-item"><span class="n">${qs.length}</span><div><b>${esc(m.titulo)}</b> ${chips(m.fases)}<div class="row" style="margin-top:6px"><button class="btn" data-ir="${mid}" data-bloco="">Ler resumo</button><button class="btn" data-trm="${mid}">Treinar a matéria</button>${caps.map(c=>`<a class="btn" href="${esc(c.url)}" target="_blank" rel="noopener">FIAP ON: ${esc(c.texto.split(" — ")[0])}</a>`).join("")}</div></div></div>`}).join("")}</div>`;
+}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-ir],[data-trm]");if(!b)return;
+  if(b.dataset.trm){treinarMateria(b.dataset.trm);return}
+  abrirMateria(b.dataset.ir,b.dataset.bloco===""?null:+b.dataset.bloco)});
 function treinarMateria(id){Object.assign(trainState,{materia:id,fonte:"",recorte:""});startTrain();show("treino");window.scrollTo(0,0)}
 
 // ---- roteiro
@@ -227,7 +283,7 @@ function renderMaterias(){
   grupos.map(g=>`<div class="group-label">${esc(g)}</div>`+MAT.filter(m=>m.grupo===g).map(m=>`
     <details class="topic" id="m-${m.id}" ${m.prioridade===3?"open":""}>
       <summary><h3>${esc(m.titulo)}</h3><span class="meta">${chips(m.fases)} <span class="pill p${m.prioridade}">${PRIO[m.prioridade]}</span> ${cnt(m.id)} questões</span></summary>
-      <div class="topic-body">${md(m.md)}
+      <div class="topic-body"><div class="md">${md(m.md)}</div>
         <div class="linkbox">
           <div><h4>No FIAP ON (precisa de login)</h4>${linkList(m.fiap)}</div>
           <div><h4>Para se aprofundar</h4>${linkList(m.links)}</div>
@@ -236,6 +292,7 @@ function renderMaterias(){
       </div>
     </details>`).join("")).join("");
   $("#materias").querySelectorAll("[data-tr]").forEach(b=>b.onclick=()=>treinarMateria(b.dataset.tr));
+  indexarBlocos();
 }
 
 // ---- questão
@@ -272,7 +329,7 @@ function renderTreino(){
    <div class="qnav"><button class="btn" id="tr-prev" ${s.i?"":"disabled"}>Anterior</button><span class="row">${REPO&&q.fonte==="comunidade"?`<a class="btn" href="${esc(REPO)}/blob/main/${esc(q.id)}.json" target="_blank" rel="noopener">Corrigir</a>`:""}<button class="btn primary" id="tr-next">${s.i<s.list.length-1?"Próxima":"Recomeçar"}</button></span></div></div>`;
   $("#treino").innerHTML=h;bindFilters();
   const card=$("#tr-card");
-  const paint=pick=>{card.querySelectorAll(".opt").forEach(b=>{const i=+b.dataset.i;b.disabled=true;if(i===q.resposta)b.classList.add("right");else if(i===pick)b.classList.add("wrong")});$("#tr-exp").innerHTML=explHTML(q,pick)};
+  const paint=pick=>{card.querySelectorAll(".opt").forEach(b=>{const i=+b.dataset.i;b.disabled=true;if(i===q.resposta)b.classList.add("right");else if(i===pick)b.classList.add("wrong")});$("#tr-exp").innerHTML=explHTML(q,pick)+(pick!==q.resposta?guiaHTML(q):"")};
   if(s.answered[q.id]!==undefined)paint(s.answered[q.id]);
   card.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{const pick=+b.dataset.i;s.answered[q.id]=pick;record(q,pick===q.resposta);paint(pick)});
   $("#tr-prev").onclick=()=>{s.i--;renderTreino()};
@@ -301,8 +358,10 @@ function renderSim(){
     const ok=sim.list.filter(q=>sim.ans[q.id]===q.resposta).length;
     el.innerHTML=`<h2>Resultado</h2><div class="row" style="gap:20px"><div class="result">${ok}/${sim.list.length}</div><div class="lead">${Math.round(ok/sim.list.length*100)}% de acerto. Os erros foram para a aba Erros.</div></div>
     <div class="row" style="margin-top:12px"><button class="btn primary" id="sim-new">Novo simulado</button></div>
+    ${revisarHTML(sim.list.filter(q=>sim.ans[q.id]!==q.resposta))}
+    <h3 style="margin-top:22px">Questão por questão</h3>
     <div class="revlist">${sim.list.map((q,i)=>{const p=sim.ans[q.id],good=p===q.resposta;return `<div class="revitem ${good?"ok":"bad"}"><div class="small">${i+1}. ${esc((MBY[q.materia]||{}).titulo)}</div><div class="qtext" style="font-size:15px">${esc(q.pergunta)}</div>${q.codigo?`<pre><code>${esc(q.codigo)}</code></pre>`:""}
-      <div class="small">Sua resposta: <b>${p===undefined?"em branco":esc(q.alternativas[p])}</b></div><div class="small">Correta: <b>${esc(q.alternativas[q.resposta])}</b></div><div class="small" style="margin-top:4px">${esc(q.explicacao)}</div></div>`}).join("")}</div>`;
+      <div class="small">Sua resposta: <b>${p===undefined?"em branco":esc(q.alternativas[p])}</b></div><div class="small">Correta: <b>${esc(q.alternativas[q.resposta])}</b></div><div class="small" style="margin-top:4px">${esc(q.explicacao)}</div>${good?"":guiaHTML(q)}</div>`}).join("")}</div>`;
     $("#sim-new").onclick=()=>{sim.on=false;renderSim()};return;
   }
   const q=sim.list[sim.i],answered=Object.keys(sim.ans).length;
@@ -323,7 +382,8 @@ function renderErros(){
   const wrong=Object.keys(hist).filter(id=>QBY[id]&&hist[id].last===false).map(id=>QBY[id]);
   $("#erros").innerHTML=`<h2>Caderno de erros</h2><p class="lead">Questões cuja última resposta foi errada. Ao acertar, ela sai daqui. Fica salvo só neste navegador.</p>`+
    (wrong.length?`<div class="row"><button class="btn primary" id="err-go">Refazer as ${wrong.length}</button></div>
-   <div class="revlist">${wrong.map(q=>`<div class="revitem bad"><div class="small">${esc((MBY[q.materia]||{}).titulo)}</div><div style="font-weight:500">${esc(q.pergunta)}</div><div class="small">Correta: <b>${esc(q.alternativas[q.resposta])}</b></div></div>`).join("")}</div>`
+   ${revisarHTML(wrong)}
+   <div class="revlist">${wrong.map(q=>`<div class="revitem bad"><div class="small">${esc((MBY[q.materia]||{}).titulo)}</div><div style="font-weight:500">${esc(q.pergunta)}</div><div class="small">Correta: <b>${esc(q.alternativas[q.resposta])}</b></div>${guiaHTML(q)}</div>`).join("")}</div>`
    :`<div class="empty">Nenhum erro pendente. O que você errar no treino ou no simulado aparece aqui.</div>`);
   const go=$("#err-go");if(go)go.onclick=()=>{Object.assign(trainState,{list:shuffle(wrong),i:0,answered:{}});renderTreino();show("treino")};
 }
