@@ -21,25 +21,11 @@ Seu progresso fica salvo no navegador. Não há login nem servidor.
 2. **Abra o capítulo no FIAP ON** pelo link da matéria e releia o **fast test** do fim do capítulo. Ele não pode ser refeito, mas depois de respondido mostra a alternativa correta e a explicação; tente responder de cabeça antes de olhar.
 3. **Revise o quiz da fase** no FIAP ON depois que a fase fecha: na página do quiz, abra a revisão da sua tentativa e releia as que errou.
 4. **Treine no site** as questões da matéria, com correção na hora.
-5. **Faça um simulado** no recorte de fases que quer cobrir (1 a 4, 5 e 6 ou uma fase só) e refaça o que errou na aba Erros.
+5. **Faça um simulado** nas fases que quer cobrir e refaça o que errou na aba Erros.
 
 Os fast tests e quizzes ficam no portal: este repositório só aponta para eles, não copia.
 
 > **Atualização das questões:** o banco é alimentado depois que cada fase termina. Matérias da fase em andamento só ganham questões após o encerramento dela.
-
-## Foco de estudo
-
-| Assunto | Matérias |
-|---|---|
-| Estrutura de dados | heap, trie, tabela hash, árvores e busca binária |
-| Lógica digital | mapa de Karnaugh, álgebra de Boole |
-| Python | leitura de código; arquivos com `write`, `seek` e `count` |
-| Matemática | derivada e gradiente descendente |
-| Energia, sustentabilidade e IA | leitura atenta e conceitos principais |
-| Também nas fases 5 e 6 | memória e periféricos, eletricidade e circuitos, EDOs e métodos numéricos, avaliação de modelos e ferramentas de ML, automação com n8n, ética e diversidade |
-| Programação | linguagem C (tipos, laços, `switch`, funções) |
-
-A coluna **Fases** da tabela abaixo mostra em que fase cada matéria aparece. Algumas só aparecem nas fases 5 e 6 (trie, arquivos em Python e boa parte de mapa de Karnaugh); no site, Treinar e Simulado têm um filtro de recorte de fases.
 
 Acha que falta um assunto ou que uma prioridade está errada? Abra uma issue ou edite os arquivos em `materias/`.
 

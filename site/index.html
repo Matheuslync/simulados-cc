@@ -60,8 +60,6 @@ blockquote p:last-child{margin:0}
 .btn:disabled{opacity:.5;cursor:default}
 select{font:500 14px var(--f-body);padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg);max-width:100%}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.intel{border-left:3px solid var(--hot);padding:4px 0 4px 14px;margin:14px 0}
-.intel p{margin:0 0 4px}
 .plan{border-top:1px solid var(--line)}
 .plan-item{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
 .plan-item input{width:18px;height:18px;accent-color:var(--accent)}
@@ -152,16 +150,13 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:16px}
 .passos li{margin-bottom:6px}
 .aviso{background:var(--code);border-radius:8px;padding:10px 14px;font-size:14px;max-width:72ch;margin:6px 0 4px}
 .fz{display:inline-block;font:600 11px var(--f-mono);padding:1px 6px;border-radius:4px;background:var(--accent-soft);color:var(--accent);margin-right:3px}
-.fz.tarde{background:var(--hot-soft);color:var(--hot)}
 .matriz{border-collapse:collapse;font-size:14px;margin:10px 0 6px}
 .matriz th,.matriz td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
 .matriz th:first-child,.matriz td:first-child{text-align:left;padding-left:0}
 .matriz td.on{color:var(--accent);font:600 13px var(--f-mono);white-space:nowrap}
-.matriz td.on.tarde{color:var(--hot)}
 .matriz td.off{color:var(--line)}
 .matriz button{background:none;border:0;padding:0;color:var(--fg);font:500 14px var(--f-body);cursor:pointer;text-align:left}
 .matriz button:hover{color:var(--accent);text-decoration:underline}
-.matriz .sep{border-left:2px solid var(--line)}
 @media (max-width:520px){.qcard{padding:14px}.plan-item{grid-template-columns:auto 1fr}.plan-item .row{grid-column:2}}
 @media (prefers-reduced-motion:no-preference){.opt{transition:border-color .12s,background .12s}}
 </style>
@@ -242,11 +237,11 @@ const tabs=[...document.querySelectorAll("#tabs button")];
 function show(t){tabs.forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));document.querySelectorAll("main>section").forEach(s=>s.hidden=s.id!==t);store.set("tab",t);if(t==="erros")renderErros();if(t==="historico"){histView=null;renderHistorico()}}
 tabs.forEach(b=>b.onclick=()=>{show(b.dataset.tab);window.scrollTo(0,0)});
 const cnt=id=>Q.filter(q=>q.materia===id).length;
-const RECORTES={"":"Todas as fases","1-4":"Fases 1 a 4","5-6":"Fases 5 e 6","1":"Fase 1","2":"Fase 2","3":"Fase 3","4":"Fase 4","5":"Fase 5","6":"Fase 6"};
+const RECORTES={"":"Todas as fases","1":"Fase 1","2":"Fase 2","3":"Fase 3","4":"Fase 4","5":"Fase 5","6":"Fase 6"};
 const fasesDoRecorte=r=>{if(!r)return null;if(r.includes("-")){const[a,b]=r.split("-").map(Number);return [1,2,3,4,5,6,7].filter(f=>f>=a&&f<=b)}return r.split(",").map(Number)};
 const noRecorte=(fases,r)=>{const fs=fasesDoRecorte(r);return !fs||(fases||[]).some(f=>fs.includes(f))};
-const recorteDe=fs=>{fs=[...new Set(fs)].sort();const k=fs.join(",");return !fs.length||k==="1,2,3,4,5,6"?"":k==="1,2,3,4"?"1-4":k==="5,6"?"5-6":k};
-const chips=fases=>(fases||[]).map(f=>`<span class="fz ${f>=5?"tarde":""}" title="Fase ${f}">F${f}</span>`).join("");
+const recorteDe=fs=>{fs=[...new Set(fs)].sort();const k=fs.join(",");return !fs.length||k==="1,2,3,4,5,6"?"":k};
+const chips=fases=>(fases||[]).map(f=>`<span class="fz" title="Fase ${f}">F${f}</span>`).join("");
 function recorteSelect(id,val){const ops=Object.assign({},RECORTES);if(val&&!ops[val])ops[val]="Fases "+val.replace(/,/g,", ");return `<select id="${id}" aria-label="Fases">${Object.entries(ops).map(([k,v])=>`<option value="${k}" ${val===k?"selected":""}>${v}</option>`).join("")}</select>`}
 function abrirMateria(id,bloco){show("materias");const el=document.getElementById("m-"+id);if(!el)return;el.open=true;
   const alvo=bloco!=null&&BLOCOS[id]?BLOCOS[id][bloco]:null;
@@ -299,22 +294,13 @@ function renderRoteiro(){
   const done=store.get("done",{});
   const order=MAT.slice().sort((a,b)=>b.prioridade-a.prioridade||a.ordem-b.ordem);
   $("#roteiro").innerHTML=`
-  <h2>Foco de estudo</h2>
-  <div class="intel">
-    <p><b>Estrutura de dados:</b> heap, trie, tabela hash, árvores e busca binária.</p>
-    <p><b>Lógica digital:</b> mapa de Karnaugh e álgebra de Boole.</p>
-    <p><b>Python:</b> leitura de código simples; arquivos com <code>write</code>, <code>seek</code> e <code>count</code>.</p>
-    <p><b>Matemática:</b> derivada e gradiente descendente (achar o mínimo).</p>
-    <p><b>Energia, sustentabilidade e IA:</b> conceitos principais e leitura atenta dos enunciados.</p>
-    <p><b>Também nas fases 5 e 6:</b> memória e periféricos, eletricidade e circuitos, EDOs e métodos numéricos, avaliação de modelos, automação com n8n, ética e diversidade.</p>
-  </div>
   <h2>Como estudar</h2>
   <ol class="passos">
     <li><b>Leia o resumo</b> da matéria na aba Matérias. Comece pelas de prioridade alta.</li>
     <li><b>Abra o capítulo no FIAP ON</b> pelo link da matéria e releia o <b>fast test</b> do fim do capítulo. Ele não pode ser refeito, mas depois de respondido mostra a alternativa correta e a explicação. Cubra as alternativas e tente responder de cabeça antes de olhar.</li>
     <li><b>Revise o quiz da fase</b> no FIAP ON depois que a fase fecha: na página do quiz, abra a revisão da sua tentativa e releia as que errou.</li>
     <li><b>Treine aqui</b> as questões da matéria, uma por vez, com correção na hora.</li>
-    <li><b>Faça um simulado</b> no recorte de fases que quer cobrir e refaça o que errou na aba Erros.</li>
+    <li><b>Faça um simulado</b> nas fases que quer cobrir e refaça o que errou na aba Erros.</li>
   </ol>
   <div class="aviso"><b>Sobre as questões:</b> o banco é alimentado depois que cada fase termina. Matérias da fase em andamento só ganham questões após o encerramento dela, então a fase atual pode aparecer com poucas ou nenhuma questão.</div>
   <h2>Seu banco de questões</h2>
@@ -323,9 +309,9 @@ function renderRoteiro(){
   ${BANCO.length?`<button class="btn" id="banco-limpar">Remover questões importadas</button>`:""}</div>
   <div id="banco-status" class="small" style="margin-top:8px">${(()=>{const i=store.get("bancoInfo",null);if(!BANCO.length)return 'Nenhuma questão importada. '+repoLink("#seu-banco-de-quest%C3%B5es","Veja o formato do arquivo")+'.';return `<b>${BANCO.length} questões importadas</b>${i?` de ${esc(i.arquivos.join(", "))} em ${esc(i.quando)}`:""}. Filtre por <b>Pessoal (local)</b> em Treinar ou Simulado.${i&&i.ignoradas.length?`<br>${i.ignoradas.length} ignoradas na última importação: ${esc(i.ignoradas.slice(0,5).join("; "))}${i.ignoradas.length>5?"…":""}`:""}`})()}</div>
   <h2>Em que fase está cada matéria</h2>
-  <p class="lead">Ainda não há consenso sobre o recorte: há quem diga que vale das fases 1 a 4 e há quem diga que entram também a 5 e a 6. A tabela mostra em que capítulo de cada fase a matéria aparece (C4 = Capítulo 4), para você decidir o que priorizar. Fases 1 a 4 em azul, 5 e 6 em laranja. Clique na matéria para abrir o resumo. Nos filtros de Treinar e Simulado dá para escolher o recorte.</p>
-  <div style="overflow-x:auto"><table class="matriz"><thead><tr><th>Matéria</th>${[1,2,3,4,5,6].map(f=>`<th class="${f===5?"sep":""}">Fase ${f}</th>`).join("")}</tr></thead><tbody>
-  ${MAT.slice().sort((a,b)=>b.prioridade-a.prioridade||a.ordem-b.ordem).map(m=>{const doF=f=>m.fiap.filter(l=>l.texto.includes("Fase "+f+" "));const caps=f=>doF(f).map(l=>l.texto).join("\n");const nums=f=>doF(f).map(l=>(l.texto.match(/Cap (\d+)/)||[])[1]).filter(Boolean);return `<tr><td><button data-res="${m.id}">${esc(m.titulo)}</button> <span class="pill p${m.prioridade}">${PRIO[m.prioridade]}</span></td>${[1,2,3,4,5,6].map(f=>m.fases.includes(f)?`<td class="on ${f>=5?"tarde":""} ${f===5?"sep":""}" title="${esc(caps(f))}">${nums(f).length?nums(f).map(n=>"C"+n).join(" "):"●"}</td>`:`<td class="off ${f===5?"sep":""}">·</td>`).join("")}</tr>`}).join("")}
+  <p class="lead">A tabela mostra em que capítulo de cada fase a matéria aparece (C4 = Capítulo 4). Clique na matéria para abrir o resumo. Nos filtros de Treinar e Simulado dá para escolher as fases.</p>
+  <div style="overflow-x:auto"><table class="matriz"><thead><tr><th>Matéria</th>${[1,2,3,4,5,6].map(f=>`<th>Fase ${f}</th>`).join("")}</tr></thead><tbody>
+  ${MAT.slice().sort((a,b)=>b.prioridade-a.prioridade||a.ordem-b.ordem).map(m=>{const doF=f=>m.fiap.filter(l=>l.texto.includes("Fase "+f+" "));const caps=f=>doF(f).map(l=>l.texto).join("\n");const nums=f=>doF(f).map(l=>(l.texto.match(/Cap (\d+)/)||[])[1]).filter(Boolean);return `<tr><td><button data-res="${m.id}">${esc(m.titulo)}</button> <span class="pill p${m.prioridade}">${PRIO[m.prioridade]}</span></td>${[1,2,3,4,5,6].map(f=>m.fases.includes(f)?`<td class="on" title="${esc(caps(f))}">${nums(f).length?nums(f).map(n=>"C"+n).join(" "):"●"}</td>`:`<td class="off">·</td>`).join("")}</tr>`}).join("")}
   </tbody></table></div>
   <h2>Roteiro de estudo</h2>
   <p class="lead">Estude primeiro as matérias de prioridade <span class="pill p3">alta</span>: leia o resumo, treine as questões da matéria e feche com um simulado. Marque cada matéria quando se sentir seguro.</p>
@@ -399,7 +385,7 @@ function filtersHTML(s){
   return `<details class="filtros" id="tr-filtros" ${store.get("filtrosAbertos",true)?"open":""}>
     <summary><span>Filtros</span><span class="small">${esc(resumo)} · <b>${n}</b> questões</span></summary>
     ${temPessoais?`<div class="fgrupo"><h5>Origem</h5><select id="tr-fonte" aria-label="Origem"><option value="">Todas as origens</option>${Object.entries(FONTES).map(([k,v])=>`<option value="${k}" ${s.fonte===k?"selected":""}>${v}</option>`).join("")}</select></div>`:""}
-    <div class="fgrupo"><h5>Fases <button data-fpre="">Todas</button><button data-fpre="1-4">1 a 4</button><button data-fpre="5-6">5 e 6</button></h5>
+    <div class="fgrupo"><h5>Fases <button data-fpre="">Todas</button></h5>
       <div class="chips">${[1,2,3,4,5,6].map(f=>`<button class="chip" data-fase="${f}" aria-pressed="${fsel.includes(f)}">Fase ${f}</button>`).join("")}</div></div>
     <div class="fgrupo"><h5>Matérias <button data-mpre="">Todas</button><button data-mpre="alta">Prioridade alta</button></h5>
       <div class="chips">${MAT.map(m=>{const ok=noRecorte(m.fases,s.recorte);const c=Q.filter(q=>q.materia===m.id&&(!s.fonte||q.fonte===s.fonte)&&noRecorte(q.fases,s.recorte)).length;
