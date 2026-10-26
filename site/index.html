@@ -342,9 +342,9 @@ function renderRoteiro(){
 function linkList(arr){return arr.length?`<ul>${arr.map(l=>`<li><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.texto)}</a></li>`).join("")}</ul>`:'<p class="small">Nenhum ainda.</p>'}
 function renderMaterias(){
   const grupos=[...new Set(MAT.map(m=>m.grupo))];
-  $("#materias").innerHTML=`<h2>Matérias</h2><p class="lead">Resumo de cada matéria com os capítulos da FIAP onde ela aparece e links para se aprofundar. As de prioridade alta já vêm abertas. Achou um erro ou quer melhorar um resumo? ${repoLink("/tree/main/materias","Edite o arquivo da matéria no GitHub")}.</p>`+
+  $("#materias").innerHTML=`<h2>Matérias</h2><p class="lead">Resumo de cada matéria com os capítulos da FIAP onde ela aparece e links para se aprofundar. Clique no nome da matéria para abrir, ou use os botões abaixo para ir direto a ela. Achou um erro ou quer melhorar um resumo? ${repoLink("/tree/main/materias","Edite o arquivo da matéria no GitHub")}.</p><div class="row" style="margin-bottom:8px"><button class="btn" id="mat-abrir">Abrir todas</button><button class="btn" id="mat-fechar">Fechar todas</button></div><div class="chips" style="margin-bottom:12px">${MAT.map(m=>`<button class="chip" data-ir="${m.id}">${esc(m.titulo)}</button>`).join("")}</div>`+
   grupos.map(g=>`<div class="group-label">${esc(g)}</div>`+MAT.filter(m=>m.grupo===g).map(m=>`
-    <details class="topic" id="m-${m.id}" ${m.prioridade===3?"open":""}>
+    <details class="topic" id="m-${m.id}">
       <summary><h3>${esc(m.titulo)}</h3><span class="meta">${chips(m.fases)} <span class="pill p${m.prioridade}">${PRIO[m.prioridade]}</span> ${cnt(m.id)} questões</span></summary>
       <div class="topic-body"><div class="md">${md(m.md)}</div>
         <div class="linkbox">
@@ -354,6 +354,9 @@ function renderMaterias(){
         <div class="row" style="margin-top:12px"><button class="btn primary" data-tr="${m.id}">Treinar esta matéria</button>${REPO?`<a class="btn" href="${esc(REPO)}/blob/main/materias/${m.id}.md" target="_blank" rel="noopener">Editar resumo</a>`:""}</div>
       </div>
     </details>`).join("")).join("");
+  $("#materias").querySelectorAll("[data-ir]").forEach(b=>b.onclick=()=>abrirMateria(b.dataset.ir));
+  $("#mat-abrir").onclick=()=>document.querySelectorAll("#materias details.topic").forEach(d=>d.open=true);
+  $("#mat-fechar").onclick=()=>document.querySelectorAll("#materias details.topic").forEach(d=>d.open=false);
   $("#materias").querySelectorAll("[data-tr]").forEach(b=>b.onclick=()=>treinarMateria(b.dataset.tr));
   indexarBlocos();
 }
